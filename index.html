@@ -14,173 +14,190 @@
 <style>
 :root {
   --white:#ffffff;
-  --bg:#f7f8fc;
-  --accent:#4a4ac0;
-  --accent2:#6060d8;
-  --text:#1a1f4d;
-  --body:#444866;
-  --muted:#7b80a0;
-  --border:#dddaf5;
-  --border-soft:#eeedf8;
-  --shadow:0 2px 12px rgba(74,74,192,.08);
-  --shadow-lg:0 6px 28px rgba(74,74,192,.13);
-  --good:#1a9f63; --good-bg:#e8f8f1; --good-text:#0d6b3f;
+  --bg:#f3f7fc;
+  --accent:#1e6bc8;
+  --accent-d:#1957a3;
+  --accent2:#3a8ad8;
+  --text:#1a2a4d;
+  --body:#3a4a66;
+  --muted:#6b7a96;
+  --border:#dce5f0;
+  --border-soft:#e8edf5;
+  --shadow:0 2px 8px rgba(30,107,200,.07);
+  --shadow-lg:0 6px 22px rgba(30,107,200,.13);
+  --good:#3aa84e; --good-bg:#e8f4ea; --good-text:#1f6b2c;
   --bad:#d63852;  --bad-bg:#fdeaed;  --bad-text:#9a1f33;
   --warn:#b87d00; --warn-bg:#fff6e0;
-  --c1:#4a4ac0; --c2:#c04a7a; --c3:#2a8fc0;
+  --tip:#5cb85c; --tip-bg:#eaf6ec;
+  --c1:#1e6bc8; --c2:#c04a7a; --c3:#2a8fc0;
   --c4:#c07a2a; --c5:#1a9f63; --c6:#7a2ac0;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%}
 body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
 
+/* ── PAGE HEADER (blu) ── */
+.page-header{background:linear-gradient(135deg,#1957a3 0%,#1e6bc8 60%,#3a8ad8 100%);color:#fff;padding:22px 0 20px}
+.page-header-inner{max-width:1200px;margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:18px}
+.page-header-icon{font-size:38px;line-height:1}
+.page-header-text h1{font-size:clamp(22px,3vw,30px);font-weight:800;letter-spacing:-.3px;line-height:1.15}
+.page-header-text p{font-size:14px;color:#cfe0f7;margin-top:4px;font-weight:400}
+
 /* ── TOP NAV ── */
-.topnav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border-soft);box-shadow:var(--shadow)}
-.topnav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:62px;display:flex;align-items:center;gap:32px}
-.topnav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;text-decoration:none;flex-shrink:0}
-.topnav-logo .logo-icon{font-size:22px}
-.topnav-logo .logo-text{font-size:17px;font-weight:800;color:var(--accent);white-space:nowrap}
-.topnav-links{display:flex;align-items:center;gap:4px;list-style:none;flex-wrap:wrap}
-.topnav-links .nav-link{
-  background:none;border:none;color:var(--muted);font-size:14px;font-weight:600;
-  padding:6px 12px;border-radius:6px;cursor:pointer;font-family:inherit;
-  transition:all .2s;border-bottom:2px solid transparent;
+.topnav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border-soft);box-shadow:0 1px 4px rgba(30,107,200,.06)}
+.topnav-inner{max-width:1200px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px}
+.nav-link{
+  background:none;border:none;color:var(--body);font-size:14px;font-weight:600;
+  padding:14px 14px;cursor:pointer;font-family:inherit;
+  transition:all .18s;border-bottom:3px solid transparent;margin-bottom:-1px;
+  display:inline-flex;align-items:center;gap:6px;
 }
-.topnav-links .nav-link:hover{color:var(--accent);background:rgba(74,74,192,.06)}
-.topnav-links .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:18px;color:var(--text);margin-left:auto}
-@media(max-width:720px){
-  .topnav-links{display:none;flex-direction:column;align-items:flex-start;position:absolute;top:62px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--border-soft);padding:12px 16px;gap:2px;box-shadow:var(--shadow-lg)}
+.nav-link:hover{color:var(--accent);background:#f3f7fc}
+.nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:18px;color:var(--text);margin-left:auto;margin:8px 0}
+@media(max-width:780px){
+  .topnav-inner{padding:0 16px}
+  .topnav-links{display:none;flex-direction:column;align-items:flex-start;width:100%;padding:6px 0 10px;gap:0}
   .topnav-links.open{display:flex}
-  .topnav-links .nav-link{width:100%;border-radius:8px;padding:10px 14px;border-bottom:none}
+  .nav-link{width:100%;border-bottom:none;padding:11px 14px;border-radius:6px}
+  .nav-link.active{background:#eaf1fa}
   .nav-toggle{display:block}
 }
+.topnav-links{display:flex;align-items:center;gap:0;list-style:none;flex-wrap:wrap}
 
 /* ── VIEWS ── */
-.view{display:none;min-height:calc(100vh - 62px);padding:40px 24px 80px}
+.view{display:none;min-height:calc(100vh - 130px);padding:36px 24px 60px}
 .view.active{display:block;animation:fadeUp .3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .inner{max-width:1100px;margin:0 auto}
 
 /* ── HOME ── */
-.hero{text-align:center;padding:56px 0 40px}
-.hero-title{font-size:clamp(38px,6vw,72px);font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,var(--text) 0%,var(--accent) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:clamp(17px,2.2vw,24px);font-style:italic;color:var(--muted);margin-top:14px}
-.sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:10px}
+.intro-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:26px 30px;margin-bottom:28px;box-shadow:var(--shadow)}
+.intro-card h2{font-size:22px;font-weight:800;color:var(--accent);margin-bottom:14px}
+.intro-card p{line-height:1.7;color:var(--body);margin-bottom:10px}
+
+.sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .sec-card{
-  background:var(--white);border:1.5px solid var(--border);border-radius:14px;
-  padding:28px 26px;cursor:pointer;transition:all .25s ease;
-  box-shadow:var(--shadow);position:relative;overflow:hidden;
+  background:var(--white);border:1.5px solid var(--border);border-radius:10px;
+  padding:20px 22px;cursor:pointer;transition:all .2s ease;
+  box-shadow:var(--shadow);border-top:3px solid var(--c);
 }
-.sec-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c);border-radius:14px 0 0 14px}
-.sec-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--c)}
-.sec-icon{font-size:34px;margin-bottom:12px}
-.sec-name{font-size:19px;font-weight:800;color:var(--text);margin-bottom:6px}
-.sec-desc{font-size:14px;color:var(--body);line-height:1.6;margin-bottom:14px}
-.sec-cta{font-size:13px;font-weight:700;color:var(--c);letter-spacing:.3px}
+.sec-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);border-color:var(--c);border-top-color:var(--c)}
+.sec-icon{font-size:30px;margin-bottom:10px;line-height:1}
+.sec-name{font-size:16px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.sec-desc{font-size:13px;color:var(--muted);line-height:1.5}
 
 /* progress dashboard */
-.dash-wrap{margin-top:48px}
-.dash-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.dash-wrap{margin-top:36px}
+.dash-title{font-size:16px;font-weight:800;color:var(--accent);margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.dash-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow)}
+.dash-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:13px 16px;box-shadow:var(--shadow)}
 .dash-card.gold{border-color:#f0b429;background:linear-gradient(135deg,#fffaeb,#fff)}
 .dash-card.done{border-color:var(--good)}
-.dash-name{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.dash-score{font-size:20px;font-weight:800;color:var(--text)}
+.dash-name{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.dash-score{font-size:19px;font-weight:800;color:var(--text)}
 .dash-score.empty{font-size:13px;font-weight:500;color:var(--muted)}
 .dash-bar{height:5px;background:var(--border-soft);border-radius:3px;margin-top:8px;overflow:hidden}
 .dash-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s ease}
 .dash-meta{font-size:11px;color:var(--muted);margin-top:5px}
 .reset-btn{display:block;margin:18px auto 0;background:none;color:var(--muted);border:1px solid var(--border);padding:7px 16px;border-radius:6px;cursor:pointer;font-size:13px;transition:all .2s}
 .reset-btn:hover{color:var(--bad);border-color:var(--bad);background:var(--bad-bg)}
-.home-footer{text-align:center;color:var(--muted);font-size:13px;margin-top:48px}
 
 /* ── SECTION HEADER ── */
-.sec-header{margin-bottom:28px}
-.sec-header h2{font-size:clamp(26px,3.5vw,38px);font-weight:800;color:var(--text)}
-.sec-header p{color:var(--muted);font-size:15px;margin-top:4px}
-.tabs{display:flex;gap:0;border-bottom:2px solid var(--border-soft);margin-bottom:28px;flex-wrap:wrap}
-.tab{background:none;border:none;padding:12px 22px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.sec-header{margin-bottom:24px}
+.sec-header h2{font-size:clamp(24px,3vw,32px);font-weight:800;color:var(--accent)}
+.sec-header p{color:var(--muted);font-size:14px;margin-top:3px}
+.tabs{display:flex;gap:0;border-bottom:1.5px solid var(--border);margin-bottom:24px;flex-wrap:wrap}
+.tab{background:none;border:none;padding:10px 18px;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;margin-bottom:-1.5px;transition:all .2s}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .panel{display:none}
 .panel.active{display:block;animation:fadeUp .25s ease}
 
 /* ── THEORY CARDS ── */
-.card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
-.card h3{font-size:20px;font-weight:800;color:var(--text);margin-bottom:10px}
-.card h4{font-size:16px;font-weight:700;color:var(--accent);margin:18px 0 8px}
-.card p{line-height:1.75;color:var(--body);margin-bottom:10px}
-.card ul,.card ol{padding-left:22px;color:var(--body);line-height:1.8}
+.card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:24px 28px;margin-bottom:18px;box-shadow:var(--shadow)}
+.card h3{font-size:18px;font-weight:800;color:var(--accent);margin-bottom:10px}
+.card h4{font-size:15px;font-weight:700;color:var(--accent-d);margin:16px 0 8px}
+.card p{line-height:1.7;color:var(--body);margin-bottom:8px}
+.card ul,.card ol{padding-left:22px;color:var(--body);line-height:1.75}
 .card li{margin-bottom:5px}
-.fbox{background:#f3f4fc;border-left:4px solid var(--accent);padding:13px 18px;margin:12px 0;border-radius:0 8px 8px 0;font-size:16px;overflow-x:auto;color:var(--text)}
-.ebox{background:var(--good-bg);border-left:4px solid var(--good);padding:12px 18px;margin:12px 0;border-radius:0 8px 8px 0;color:var(--good-text)}
-.ebox strong{font-weight:700}
-.wbox{background:var(--warn-bg);border-left:4px solid var(--warn);padding:12px 18px;margin:12px 0;border-radius:0 8px 8px 0;color:var(--warn)}
+.fbox{background:#eaf1fa;border-left:4px solid var(--accent);padding:12px 16px;margin:11px 0;border-radius:0 6px 6px 0;font-size:15.5px;overflow-x:auto;color:var(--text)}
+.ebox{background:var(--tip-bg);border-left:4px solid var(--tip);padding:11px 16px;margin:11px 0;border-radius:0 6px 6px 0;color:#2d6e34;font-size:14.5px}
+.ebox strong{font-weight:700;color:#1e5e25}
+.tipbox{background:var(--tip-bg);border-left:4px solid var(--tip);padding:11px 16px;margin:11px 0;border-radius:0 6px 6px 0;color:#2d6e34;font-size:14.5px}
+.tipbox::before{content:'💡 ';font-size:16px}
+.wbox{background:var(--warn-bg);border-left:4px solid var(--warn);padding:11px 16px;margin:11px 0;border-radius:0 6px 6px 0;color:var(--warn);font-size:14.5px}
 .badge{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-right:6px}
 
 /* ── EXERCISES ── */
-.ex-card{background:var(--white);border:1.5px solid var(--border);border-radius:14px;padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
-.ex-num{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
-.ex-title{font-size:18px;font-weight:800;color:var(--text);margin-bottom:12px}
-.ex-prompt{background:#f3f4fc;border-left:4px solid var(--accent);padding:14px 18px;margin-bottom:16px;border-radius:0 8px 8px 0;font-size:17px;color:var(--text)}
-.ex-step{background:#fafbff;border:1.5px solid var(--border-soft);border-radius:10px;padding:13px 16px;margin-bottom:10px;display:none;animation:fadeUp .2s ease}
+.ex-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:24px 28px;margin-bottom:18px;box-shadow:var(--shadow)}
+.ex-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.ex-title{font-size:17px;font-weight:800;color:var(--accent);margin-bottom:12px}
+.ex-prompt{background:#eaf1fa;border-left:4px solid var(--accent);padding:13px 16px;margin-bottom:14px;border-radius:0 6px 6px 0;font-size:16px;color:var(--text)}
+.ex-step{background:#f7faff;border:1.5px solid var(--border-soft);border-radius:8px;padding:12px 14px;margin-bottom:9px;display:none;animation:fadeUp .2s ease}
 .ex-step.shown,.ex-final.shown{display:block}
-.ex-final{background:var(--good-bg);border:1.5px solid var(--good);border-radius:10px;padding:13px 16px;margin-bottom:10px;display:none;animation:fadeUp .2s ease}
-.step-label{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:7px;color:#fff;background:var(--accent)}
+.ex-final{background:var(--good-bg);border:1.5px solid var(--good);border-radius:8px;padding:12px 14px;margin-bottom:9px;display:none;animation:fadeUp .2s ease}
+.step-label{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:7px;color:#fff;background:var(--accent)}
 .ex-final .step-label{background:var(--good)}
-.step-content{color:var(--body);line-height:1.7;font-size:15px}
-.ex-final .step-content{color:var(--good-text);font-weight:600;font-size:16px}
-.ex-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
-.btn-ghost{background:#fff;color:var(--text);border:1.5px solid var(--border);padding:9px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;transition:all .2s}
-.btn-ghost:hover{background:var(--bg);border-color:var(--accent);color:var(--accent)}
+.step-content{color:var(--body);line-height:1.7;font-size:14.5px}
+.ex-final .step-content{color:var(--good-text);font-weight:600;font-size:15px}
+.ex-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn-ghost{background:#fff;color:var(--text);border:1.5px solid var(--border);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;transition:all .2s}
+.btn-ghost:hover{background:#eaf1fa;border-color:var(--accent);color:var(--accent)}
 .btn-ghost:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 
 /* ── QUIZ ── */
-.q-bar{display:flex;align-items:center;gap:12px;margin-bottom:20px;font-size:13px;color:var(--muted)}
-.q-prog-bar{flex:1;height:7px;background:var(--border-soft);border-radius:4px;overflow:hidden}
+.q-bar{display:flex;align-items:center;gap:12px;margin-bottom:18px;font-size:13px;color:var(--muted)}
+.q-prog-bar{flex:1;height:6px;background:var(--border-soft);border-radius:4px;overflow:hidden}
 .q-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
-.q-text{font-size:19px;font-weight:700;color:var(--text);margin-bottom:20px;line-height:1.5}
-.choices{display:grid;gap:11px}
+.q-text{font-size:17px;font-weight:700;color:var(--text);margin-bottom:18px;line-height:1.5}
+.choices{display:grid;gap:10px}
 .choice{
   background:#fff;border:1.5px solid var(--border);color:var(--text);
-  padding:15px 18px;border-radius:10px;cursor:pointer;text-align:left;
-  font-size:15px;font-family:inherit;font-weight:500;transition:all .2s;
+  padding:13px 16px;border-radius:8px;cursor:pointer;text-align:left;
+  font-size:15px;font-family:inherit;font-weight:500;transition:all .18s;
 }
-.choice:hover:not(:disabled){background:#f5f5ff;border-color:var(--accent2);transform:translateX(4px);box-shadow:0 3px 10px rgba(74,74,192,.1)}
+.choice:hover:not(:disabled){background:#f3f7fc;border-color:var(--accent);transform:translateX(3px);box-shadow:0 2px 8px rgba(30,107,200,.1)}
 .choice:disabled{cursor:default}
 .choice.correct{background:var(--good-bg);border-color:var(--good);color:var(--good-text);font-weight:600}
 .choice.wrong{background:var(--bad-bg);border-color:var(--bad);color:var(--bad-text);font-weight:600}
-.q-feedback{margin-top:14px;padding:13px 16px;border-radius:10px;font-size:14px;line-height:1.6;display:none}
+.q-feedback{margin-top:14px;padding:12px 14px;border-radius:8px;font-size:14px;line-height:1.6;display:none}
 .q-feedback.ok{background:var(--good-bg);border-left:3px solid var(--good);color:var(--good-text);display:block}
 .q-feedback.no{background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad-text);display:block}
-.q-foot{display:flex;justify-content:flex-end;margin-top:16px}
-.btn-primary{background:var(--accent);color:#fff;border:none;padding:11px 22px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;transition:all .2s;box-shadow:0 3px 10px rgba(74,74,192,.2)}
-.btn-primary:hover{background:var(--accent2);box-shadow:0 5px 16px rgba(74,74,192,.3)}
+.q-foot{display:flex;justify-content:flex-end;margin-top:14px}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;transition:all .18s;box-shadow:0 2px 8px rgba(30,107,200,.2)}
+.btn-primary:hover{background:var(--accent-d);box-shadow:0 4px 14px rgba(30,107,200,.3)}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
-.result-box{text-align:center;padding:32px 20px}
-.result-score{font-size:72px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--good));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin:16px 0}
-.result-msg{font-size:18px;color:var(--body);margin-bottom:26px}
+.result-box{text-align:center;padding:28px 20px}
+.result-score{font-size:64px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--good));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin:14px 0}
+.result-msg{font-size:17px;color:var(--body);margin-bottom:24px}
 </style>
 </head>
 <body>
 
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="page-header-icon">📐</div>
+    <div class="page-header-text">
+      <h1>Il Calcolo Algebrico</h1>
+      <p>Algebra · teoria, esercizi guidati &amp; quiz</p>
+    </div>
+  </div>
+</header>
+
 <!-- TOP NAV -->
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="topnav-logo" data-go="home" href="#">
-      <span class="logo-icon">📐</span>
-      <span class="logo-text">Calcolo Algebrico</span>
-    </a>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰ Menu</button>
     <ul class="topnav-links" id="topnav-links">
-      <li><button class="nav-link" data-go="monomi">Monomi</button></li>
-      <li><button class="nav-link" data-go="polinomi">Polinomi</button></li>
-      <li><button class="nav-link" data-go="prodotti">Prod. Notevoli</button></li>
-      <li><button class="nav-link" data-go="scomposizione">Scomposizione</button></li>
-      <li><button class="nav-link" data-go="frazioni">Frazioni</button></li>
-      <li><button class="nav-link" data-go="espressioni">Espressioni</button></li>
+      <li><button class="nav-link active" data-go="home">🏠 Home</button></li>
+      <li><button class="nav-link" data-go="monomi">🔢 Monomi</button></li>
+      <li><button class="nav-link" data-go="polinomi">📊 Polinomi</button></li>
+      <li><button class="nav-link" data-go="prodotti">✨ Prod. Notevoli</button></li>
+      <li><button class="nav-link" data-go="scomposizione">🧩 Scomposizione</button></li>
+      <li><button class="nav-link" data-go="frazioni">➗ Frazioni</button></li>
+      <li><button class="nav-link" data-go="espressioni">🎯 Espressioni</button></li>
     </ul>
   </div>
 </nav>
@@ -190,46 +207,43 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 <!-- HOME -->
 <section id="home" class="view active">
   <div class="inner">
-    <div class="hero">
-      <h1 class="hero-title">Il Calcolo Algebrico</h1>
-      <p class="hero-sub">Il tuo superpotere matematico 🚀</p>
+    <div class="intro-card">
+      <h2>Cos'è il calcolo algebrico?</h2>
+      <p>Il <strong>calcolo algebrico</strong> è l'insieme delle regole e tecniche che permettono di operare con espressioni in cui compaiono lettere oltre ai numeri. Imparare a manipolarle correttamente è la base per affrontare equazioni, disequazioni, funzioni e tutta la matematica del triennio.</p>
+      <p>In questa app trovi <strong>sei sezioni</strong>: per ognuna c'è una scheda di <em>teoria</em>, una serie di <em>esercizi guidati passo-passo</em> e un <em>quiz</em> di 10 domande con feedback immediato.</p>
+      <div class="tipbox">Suggerimento: parti dalla teoria, prova gli esercizi guidati per vedere il metodo, poi mettiti alla prova con il quiz. I tuoi progressi vengono salvati automaticamente.</div>
     </div>
+
     <div class="sec-grid">
       <div class="sec-card" data-go="monomi" style="--c:var(--c1)">
         <div class="sec-icon">🔢</div>
         <div class="sec-name">Monomi</div>
         <div class="sec-desc">Coefficienti, parte letterale, grado e le quattro operazioni fondamentali.</div>
-        <div class="sec-cta">Esplora →</div>
       </div>
       <div class="sec-card" data-go="polinomi" style="--c:var(--c2)">
         <div class="sec-icon">📊</div>
         <div class="sec-name">Polinomi &amp; Ruffini</div>
         <div class="sec-desc">Operazioni tra polinomi e divisione con lo schema di Ruffini.</div>
-        <div class="sec-cta">Esplora →</div>
       </div>
       <div class="sec-card" data-go="prodotti" style="--c:var(--c3)">
         <div class="sec-icon">✨</div>
         <div class="sec-name">Prodotti Notevoli</div>
-        <div class="sec-desc">Le formule magiche: quadrati, cubi e somma per differenza.</div>
-        <div class="sec-cta">Esplora →</div>
+        <div class="sec-desc">Le formule da conoscere a memoria: quadrati, cubi, somma per differenza.</div>
       </div>
       <div class="sec-card" data-go="scomposizione" style="--c:var(--c4)">
         <div class="sec-icon">🧩</div>
         <div class="sec-name">Scomposizione</div>
         <div class="sec-desc">Raccoglimenti, differenza di quadrati, trinomi e metodo di Ruffini.</div>
-        <div class="sec-cta">Esplora →</div>
       </div>
       <div class="sec-card" data-go="frazioni" style="--c:var(--c5)">
         <div class="sec-icon">➗</div>
         <div class="sec-name">Frazioni Algebriche</div>
         <div class="sec-desc">Dominio, semplificazione, prodotti e somme di frazioni con polinomi.</div>
-        <div class="sec-cta">Esplora →</div>
       </div>
       <div class="sec-card" data-go="espressioni" style="--c:var(--c6)">
         <div class="sec-icon">🎯</div>
         <div class="sec-name">Espressioni</div>
-        <div class="sec-desc">Metti tutto insieme: strategia, errori comuni ed espressioni complesse.</div>
-        <div class="sec-cta">Esplora →</div>
+        <div class="sec-desc">Strategia generale, errori tipici ed espressioni complesse miste.</div>
       </div>
     </div>
 
@@ -238,7 +252,6 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
       <div class="dash-grid" id="dash-grid"></div>
       <button class="reset-btn" id="reset-btn">Azzera progressi</button>
     </div>
-    <div class="home-footer">Liceo Scientifico &nbsp;—&nbsp; Classi 3ª e 4ª</div>
   </div>
 </section>
 
