@@ -185,7 +185,8 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 .q-feedback{margin-top:14px;padding:12px 14px;border-radius:8px;font-size:14px;line-height:1.6;display:none}
 .q-feedback.ok{background:var(--good-bg);border-left:3px solid var(--good);color:var(--good-text);display:block}
 .q-feedback.no{background:var(--bad-bg);border-left:3px solid var(--bad);color:var(--bad-text);display:block}
-.q-foot{display:flex;justify-content:flex-end;margin-top:14px}
+.q-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px}
+.q-foot .spacer{flex:1}
 .btn-primary{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;transition:all .18s;box-shadow:0 2px 8px rgba(30,107,200,.2)}
 .btn-primary:hover{background:var(--accent-d);box-shadow:0 4px 14px rgba(30,107,200,.3)}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
@@ -1021,53 +1022,82 @@ const QUIZZES = {
 };
 
 /* ── QUIZ ENGINE ── */
+const PRAISE_OK = ['🎉 Bravissimo!','⭐ Perfetto!','👏 Esatto!','🚀 Ottimo!','💡 Proprio così!','🔥 Grande!'];
+const PRAISE_NO = ['Non fa niente, si impara così! 💪','Quasi! Guarda perché — la prossima la prendi. 🙌','Capita a tutti: ecco il ragionamento giusto. 🌱','Nessun problema, ora ti è più chiaro. ✨','Ci sei vicino! Fissa bene questo passaggio. 📘'];
+function shuffleArr(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
 function mountQuiz(container, key) {
   const data = QUIZZES[key];
   if (!data) { container.innerHTML='<div class="card">Quiz non disponibile.</div>'; return; }
-  let idx=0, answered=false, score=0;
+  // stato per domanda: ordine casuale delle opzioni + risposta scelta + frase incoraggiante
+  const state = data.map(q=>({ order: shuffleArr(q.choices.map((_,i)=>i)), picked:null, praise:'' }));
+  let idx = 0;
+  function scoreSoFar(){ return state.reduce((s,st,i)=> s + (st.picked!==null && st.order[st.picked]===data[i].correct ? 1 : 0), 0); }
+  function answeredCount(){ return state.filter(st=>st.picked!==null).length; }
+
   function render() {
     if (idx >= data.length) { showResult(); return; }
-    const q = data[idx];
+    const q = data[idx], st = state[idx];
+    const correctDisp = st.order.indexOf(q.correct);
+    const isLast = idx===data.length-1;
     container.innerHTML = `
       <div class="card">
         <div class="q-bar">
           <span>Domanda ${idx+1}/${data.length}</span>
-          <div class="q-prog-bar"><div class="q-prog-fill" style="width:${idx/data.length*100}%"></div></div>
-          <span>Punti: ${score}</span>
+          <div class="q-prog-bar"><div class="q-prog-fill" style="width:${(idx+ (st.picked!==null?1:0))/data.length*100}%"></div></div>
+          <span>Punti: ${scoreSoFar()}</span>
         </div>
         <div class="q-text"><span class="badge">${q.type==='teorico'?'Teorico':'Pratico'}</span>${q.q}</div>
         <div class="choices"></div>
         <div class="q-feedback"></div>
-        <div class="q-foot"><button class="btn-primary next-btn" disabled>${idx===data.length-1?'Vedi risultato':'Avanti →'}</button></div>
+        <div class="q-foot">
+          <button class="btn-ghost back-btn" ${idx===0?'disabled':''}>← Indietro</button>
+          <span class="spacer"></span>
+          <button class="btn-primary next-btn" ${st.picked===null?'disabled':''}>${isLast?'Vedi risultato':'Avanti →'}</button>
+        </div>
       </div>`;
     const cw = container.querySelector('.choices');
-    q.choices.forEach((c,i)=>{
+    st.order.forEach((origIdx, dispIdx)=>{
       const b = document.createElement('button');
-      b.className='choice'; b.innerHTML=c;
-      b.onclick=()=>pick(i);
+      b.className='choice'; b.innerHTML=q.choices[origIdx];
+      if (st.picked!==null) {
+        b.disabled = true;
+        if (dispIdx===correctDisp) b.classList.add('correct');
+        if (dispIdx===st.picked && st.picked!==correctDisp) b.classList.add('wrong');
+      } else {
+        b.onclick = ()=>pick(dispIdx);
+      }
       cw.appendChild(b);
     });
-    container.querySelector('.next-btn').onclick=()=>{ idx++; answered=false; render(); };
+    if (st.picked!==null) showFeedback();
+    container.querySelector('.back-btn').onclick = ()=>{ if(idx>0){ idx--; render(); } };
+    container.querySelector('.next-btn').onclick = ()=>{ idx++; render(); };
     if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([container]);
   }
-  function pick(i) {
-    if (answered) return;
-    answered=true;
-    const q=data[idx];
-    container.querySelectorAll('.choice').forEach(b=>b.disabled=true);
-    container.querySelectorAll('.choice')[q.correct].classList.add('correct');
-    if (i!==q.correct) container.querySelectorAll('.choice')[i].classList.add('wrong');
-    else score++;
+  function showFeedback() {
+    const q=data[idx], st=state[idx];
+    const ok = st.order[st.picked]===q.correct;
     const fb=container.querySelector('.q-feedback');
-    fb.className='q-feedback '+(i===q.correct?'ok':'no');
-    fb.innerHTML=(i===q.correct?'✅ <strong>Corretto!</strong> ':'❌ <strong>Non corretto.</strong> ')+q.expl;
-    container.querySelector('.next-btn').disabled=false;
+    fb.className='q-feedback '+(ok?'ok':'no');
+    fb.innerHTML = ok
+      ? `<strong>${st.praise}</strong> ${q.expl}`
+      : `<strong>${st.praise}</strong><br><em>La risposta corretta è evidenziata in verde.</em> ${q.expl}`;
     if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([fb]);
   }
+  function pick(dispIdx) {
+    const st = state[idx];
+    if (st.picked!==null) return;
+    st.picked = dispIdx;
+    const ok = st.order[dispIdx]===data[idx].correct;
+    st.praise = ok ? PRAISE_OK[Math.floor(Math.random()*PRAISE_OK.length)]
+                   : PRAISE_NO[Math.floor(Math.random()*PRAISE_NO.length)];
+    render();
+  }
   function showResult() {
+    const score = scoreSoFar();
     saveScore(key, score, data.length);
     const pct=Math.round(score/data.length*100);
-    const msg=pct===100?'🌟 Perfetto! Sei un asso!':pct>=80?'🎉 Ottimo lavoro!':pct>=60?'👍 Bene! Continua così.':pct>=40?'📚 Ripassa e riprova.':'💪 Non mollare, studia e riprova!';
+    const msg=pct===100?'🌟 Perfetto! Sei un vero asso dell\'algebra!':pct>=80?'🎉 Ottimo lavoro, ci sei quasi al 100%!':pct>=60?'👍 Bene! Ancora un piccolo sforzo e sarai il migliore.':pct>=40?'📚 Buon inizio: ripassa la teoria e riprova, migliorerai di sicuro!':'💪 Non mollare! Ogni errore ti fa imparare: rivedi gli esempi e riprova.';
     container.innerHTML=`<div class="card result-box">
       <h3>Risultato</h3>
       <div class="result-score">${score}/${data.length}</div>
