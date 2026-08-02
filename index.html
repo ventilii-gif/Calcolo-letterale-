@@ -48,14 +48,14 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 .topnav-inner{max-width:1200px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-height:50px}
 .nav-link{
   background:none;border:none;color:var(--body);font-size:14px;font-weight:600;
-  padding:14px 14px;cursor:pointer;font-family:inherit;
+  padding:14px 13px;cursor:pointer;font-family:inherit;
   transition:all .18s;border-bottom:3px solid transparent;margin-bottom:-1px;
-  display:inline-flex;align-items:center;gap:6px;
+  display:inline-flex;align-items:center;gap:6px;white-space:nowrap;
 }
 .nav-link:hover{color:var(--accent);background:#f3f7fc}
 .nav-link.active{color:var(--accent);border-bottom-color:var(--accent)}
 .nav-toggle{display:none;background:none;border:1px solid var(--border);border-radius:6px;padding:5px 10px;cursor:pointer;font-size:18px;color:var(--text);margin-left:auto;margin:8px 0}
-@media(max-width:780px){
+@media(max-width:860px){
   .topnav-inner{padding:0 16px}
   .topnav-links{display:none;flex-direction:column;align-items:flex-start;width:100%;padding:6px 0 10px;gap:0}
   .topnav-links.open{display:flex}
@@ -72,9 +72,13 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 .inner{max-width:1100px;margin:0 auto}
 
 /* ── HOME ── */
-.intro-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:26px 30px;margin-bottom:28px;box-shadow:var(--shadow)}
+.intro-card{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:26px 30px;margin-bottom:22px;box-shadow:var(--shadow)}
 .intro-card h2{font-size:22px;font-weight:800;color:var(--accent);margin-bottom:14px}
 .intro-card p{line-height:1.7;color:var(--body);margin-bottom:10px}
+.hist-card{background:linear-gradient(135deg,#fffaf2,#fff);border:1.5px solid #f0d9b5;border-left:4px solid var(--c4);border-radius:12px;padding:24px 30px;margin-bottom:28px;box-shadow:var(--shadow)}
+.hist-card h2{font-size:20px;font-weight:800;color:var(--c4);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.hist-card p{line-height:1.75;color:var(--body);margin-bottom:10px}
+.hist-card strong{color:var(--text)}
 
 .sec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .sec-card{
@@ -127,6 +131,7 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 .tipbox{background:var(--tip-bg);border-left:4px solid var(--tip);padding:11px 16px;margin:11px 0;border-radius:0 6px 6px 0;color:#2d6e34;font-size:14.5px}
 .tipbox::before{content:'💡 ';font-size:16px}
 .wbox{background:var(--warn-bg);border-left:4px solid var(--warn);padding:11px 16px;margin:11px 0;border-radius:0 6px 6px 0;color:var(--warn);font-size:14.5px}
+.wbox::before{content:'⚠️ ';font-size:16px}
 .badge{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:20px;margin-right:6px}
 
 /* ── EXERCISES ── */
@@ -145,6 +150,22 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 .btn-ghost{background:#fff;color:var(--text);border:1.5px solid var(--border);padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;font-family:inherit;transition:all .2s}
 .btn-ghost:hover{background:#eaf1fa;border-color:var(--accent);color:var(--accent)}
 .btn-ghost:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+
+/* ── SIMULATION ── */
+.sim{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:24px 28px;box-shadow:var(--shadow)}
+.sim-title{font-size:17px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.sim-intro{color:var(--body);font-size:15px;margin-bottom:18px}
+.sim-stage{min-height:64px;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.sim-empty{color:var(--muted);font-size:14px;font-style:italic;padding:8px 2px}
+.sim-frame{background:#f7faff;border:1.5px solid var(--border-soft);border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 16px;opacity:0;transform:translateY(10px);animation:simIn .45s ease forwards}
+.sim-frame.final{background:var(--good-bg);border-left-color:var(--good)}
+@keyframes simIn{to{opacity:1;transform:translateY(0)}}
+.sim-expr{font-size:17px;color:var(--text);margin-bottom:5px}
+.sim-note{font-size:13.5px;color:var(--muted);line-height:1.55}
+.sim-frame.final .sim-note{color:var(--good-text);font-weight:600}
+.sim-bar{height:6px;background:var(--border-soft);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.sim-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s}
+.sim-ctrl{display:flex;gap:8px;flex-wrap:wrap}
 
 /* ── QUIZ ── */
 .q-bar{display:flex;align-items:center;gap:12px;margin-bottom:18px;font-size:13px;color:var(--muted)}
@@ -181,7 +202,7 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
     <div class="page-header-icon">📐</div>
     <div class="page-header-text">
       <h1>Il Calcolo Algebrico</h1>
-      <p>Algebra · teoria, esercizi guidati &amp; quiz</p>
+      <p>Scomposizioni · Ruffini · Frazioni algebriche · Espressioni</p>
     </div>
   </div>
 </header>
@@ -192,11 +213,11 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
     <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰ Menu</button>
     <ul class="topnav-links" id="topnav-links">
       <li><button class="nav-link active" data-go="home">🏠 Home</button></li>
-      <li><button class="nav-link" data-go="monomi">🔢 Monomi</button></li>
-      <li><button class="nav-link" data-go="polinomi">📊 Polinomi</button></li>
+      <li><button class="nav-link" data-go="prerequisiti">📎 Prerequisiti</button></li>
+      <li><button class="nav-link" data-go="raccoglimento">🧲 Raccoglimento</button></li>
       <li><button class="nav-link" data-go="prodotti">✨ Prod. Notevoli</button></li>
-      <li><button class="nav-link" data-go="scomposizione">🧩 Scomposizione</button></li>
-      <li><button class="nav-link" data-go="frazioni">➗ Frazioni</button></li>
+      <li><button class="nav-link" data-go="ruffini">➗ Ruffini</button></li>
+      <li><button class="nav-link" data-go="frazioni">🍰 Frazioni</button></li>
       <li><button class="nav-link" data-go="espressioni">🎯 Espressioni</button></li>
     </ul>
   </div>
@@ -204,46 +225,62 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 
 <main>
 
-<!-- HOME -->
+<!-- HOME / PRESENTAZIONE -->
 <section id="home" class="view active">
   <div class="inner">
     <div class="intro-card">
-      <h2>Cos'è il calcolo algebrico?</h2>
-      <p>Il <strong>calcolo algebrico</strong> è l'insieme delle regole e tecniche che permettono di operare con espressioni in cui compaiono lettere oltre ai numeri. Imparare a manipolarle correttamente è la base per affrontare equazioni, disequazioni, funzioni e tutta la matematica del triennio.</p>
-      <p>In questa app trovi <strong>sei sezioni</strong>: per ognuna c'è una scheda di <em>teoria</em>, una serie di <em>esercizi guidati passo-passo</em> e un <em>quiz</em> di 10 domande con feedback immediato.</p>
-      <div class="tipbox">Suggerimento: parti dalla teoria, prova gli esercizi guidati per vedere il metodo, poi mettiti alla prova con il quiz. I tuoi progressi vengono salvati automaticamente.</div>
+      <h2>Benvenuto! 👋</h2>
+      <p>Questo è il tuo laboratorio per imparare il <strong>calcolo algebrico</strong>: quel gioco di lettere e numeri che sta alla base di equazioni, disequazioni e funzioni. Qui non ti limiterai a leggere: <strong>guarderai, proverai e ti metterai alla prova</strong>.</p>
+      <p>Il percorso è diviso in cinque tappe da affrontare nell'ordine che preferisci:</p>
+      <ul style="padding-left:22px;line-height:1.9;color:var(--body);margin:8px 0">
+        <li><strong>Raccoglimento</strong> a fattor comune (totale e parziale)</li>
+        <li><strong>Prodotti notevoli</strong> e come usarli per scomporre</li>
+        <li><strong>Divisione con la regola di Ruffini</strong> e il teorema del resto</li>
+        <li><strong>Frazioni algebriche</strong> e le operazioni con esse</li>
+        <li><strong>Espressioni algebriche</strong> complete</li>
+      </ul>
+      <p>In ogni tappa trovi <strong>quattro schede</strong>:</p>
+      <p>📚 <strong>Teoria</strong> — le idee e le formule chiave &nbsp;·&nbsp; 🎬 <strong>Simulazione</strong> — un esempio che si costruisce passo dopo passo davanti ai tuoi occhi &nbsp;·&nbsp; ✏️ <strong>Esercizi</strong> — svolti passo-passo, riveli un aiuto alla volta &nbsp;·&nbsp; 🎯 <strong>Quiz</strong> — 10 domande con feedback immediato.</p>
+      <div class="tipbox">Prima di iniziare, dai un'occhiata alla scheda <strong>Prerequisiti</strong>: un ripasso veloce di monomi e polinomi. I tuoi punteggi dei quiz vengono salvati automaticamente nel browser.</div>
+    </div>
+
+    <div class="hist-card">
+      <h2>📜 Una nota storica</h2>
+      <p>La parola <strong>«algebra»</strong> ha più di mille anni. Nasce dal titolo di un libro scritto intorno all'<strong>820 d.C.</strong> a Baghdad dal matematico persiano <strong>al-Khwārizmī</strong>: <em>«al-Kitāb al-mukhtaṣar fī ḥisāb al-jabr wa'l-muqābala»</em>. Quel <em>«al-jabr»</em> — che significa «ricomporre», «rimettere insieme» — è diventato la nostra parola <strong>algebra</strong>. Dallo stesso autore, storpiando il suo nome, deriva anche il termine <em>«algoritmo»</em>.</p>
+      <p>Per secoli i problemi si scrivevano a parole. Solo alla fine del <strong>Cinquecento</strong> il francese <strong>François Viète</strong> ebbe l'idea rivoluzionaria di usare le <strong>lettere</strong> al posto dei numeri: da lì nasce il calcolo letterale che studierai.</p>
+      <p>E il metodo di divisione veloce che incontrerai porta il nome di <strong>Paolo Ruffini</strong> (1765–1822), matematico e medico italiano: un pezzo di questa storia parla proprio la nostra lingua. 🇮🇹</p>
     </div>
 
     <div class="sec-grid">
-      <div class="sec-card" data-go="monomi" style="--c:var(--c1)">
-        <div class="sec-icon">🔢</div>
-        <div class="sec-name">Monomi</div>
-        <div class="sec-desc">Coefficienti, parte letterale, grado e le quattro operazioni fondamentali.</div>
+      <div class="sec-card" data-go="prerequisiti" style="--c:var(--c1)">
+        <div class="sec-icon">📎</div>
+        <div class="sec-name">Prerequisiti</div>
+        <div class="sec-desc">Ripasso lampo: monomi, polinomi e le operazioni di base.</div>
       </div>
-      <div class="sec-card" data-go="polinomi" style="--c:var(--c2)">
-        <div class="sec-icon">📊</div>
-        <div class="sec-name">Polinomi &amp; Ruffini</div>
-        <div class="sec-desc">Operazioni tra polinomi e divisione con lo schema di Ruffini.</div>
+      <div class="sec-card" data-go="raccoglimento" style="--c:var(--c4)">
+        <div class="sec-icon">🧲</div>
+        <div class="sec-name">Raccoglimento</div>
+        <div class="sec-desc">A fattor comune totale e parziale: il primo passo per scomporre.</div>
       </div>
       <div class="sec-card" data-go="prodotti" style="--c:var(--c3)">
         <div class="sec-icon">✨</div>
         <div class="sec-name">Prodotti Notevoli</div>
-        <div class="sec-desc">Le formule da conoscere a memoria: quadrati, cubi, somma per differenza.</div>
+        <div class="sec-desc">Quadrati, cubi, somma per differenza — e la scomposizione inversa.</div>
       </div>
-      <div class="sec-card" data-go="scomposizione" style="--c:var(--c4)">
-        <div class="sec-icon">🧩</div>
-        <div class="sec-name">Scomposizione</div>
-        <div class="sec-desc">Raccoglimenti, differenza di quadrati, trinomi e metodo di Ruffini.</div>
+      <div class="sec-card" data-go="ruffini" style="--c:var(--c2)">
+        <div class="sec-icon">➗</div>
+        <div class="sec-name">Divisione di Ruffini</div>
+        <div class="sec-desc">Lo schema veloce e il teorema del resto per scomporre.</div>
       </div>
       <div class="sec-card" data-go="frazioni" style="--c:var(--c5)">
-        <div class="sec-icon">➗</div>
+        <div class="sec-icon">🍰</div>
         <div class="sec-name">Frazioni Algebriche</div>
-        <div class="sec-desc">Dominio, semplificazione, prodotti e somme di frazioni con polinomi.</div>
+        <div class="sec-desc">Dominio, semplificazione e operazioni con le frazioni.</div>
       </div>
       <div class="sec-card" data-go="espressioni" style="--c:var(--c6)">
         <div class="sec-icon">🎯</div>
         <div class="sec-name">Espressioni</div>
-        <div class="sec-desc">Strategia generale, errori tipici ed espressioni complesse miste.</div>
+        <div class="sec-desc">Mettere insieme tutto: la strategia per le espressioni complete.</div>
       </div>
     </div>
 
@@ -255,113 +292,117 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
   </div>
 </section>
 
-<!-- MONOMI -->
-<section id="monomi" class="view">
+<!-- PREREQUISITI -->
+<section id="prerequisiti" class="view">
   <div class="inner">
-    <div class="sec-header"><h2>Monomi</h2><p>I mattoncini base dell'algebra</p></div>
+    <div class="sec-header"><h2>Prerequisiti</h2><p>Un ripasso veloce prima di partire</p></div>
     <div class="tabs">
-      <button class="tab active" data-tab="tm">📚 Teoria</button>
-      <button class="tab" data-tab="em">✏️ Esercizi guidati</button>
-      <button class="tab" data-tab="qm">🎯 Quiz (10)</button>
+      <button class="tab active" data-tab="pre-m">🔢 Monomi</button>
+      <button class="tab" data-tab="pre-p">📊 Polinomi</button>
     </div>
-    <div id="tm" class="panel active">
+    <div id="pre-m" class="panel active">
       <div class="card">
-        <h3>Cos'è un monomio?</h3>
-        <p>Un <strong>monomio</strong> è il prodotto di un numero (<em>coefficiente</em>) per una o più lettere (<em>parte letterale</em>) elevate a esponenti interi non negativi.</p>
+        <h3>Monomi</h3>
+        <p>Un <strong>monomio</strong> è il prodotto di un numero (<em>coefficiente</em>) per una o più lettere (<em>parte letterale</em>) con esponenti interi non negativi.</p>
         <div class="fbox">Esempi: $5x^2y$, $\;-3ab^3$, $\;\tfrac{1}{2}xy^2$, $\;7$</div>
-        <h4>Grado</h4>
-        <p>Somma degli esponenti di tutte le lettere.</p>
-        <div class="ebox"><strong>Es.:</strong> $5x^3y^2z$ ha grado $3+2+1=6$.</div>
-        <h4>Monomi simili</h4>
-        <p>Stessa parte letterale (stesse lettere con stessi esponenti).</p>
-        <div class="ebox"><strong>Simili:</strong> $3x^2y$ e $-7x^2y$ &nbsp;|&nbsp; <strong>Non simili:</strong> $3x^2y$ e $3xy^2$</div>
+        <p>Il <strong>grado</strong> è la somma degli esponenti delle lettere; monomi <strong>simili</strong> hanno la stessa parte letterale.</p>
+        <div class="ebox"><strong>Es.:</strong> $5x^3y^2z$ ha grado $6$. &nbsp;$3x^2y$ e $-7x^2y$ sono simili.</div>
       </div>
       <div class="card">
-        <h3>Operazioni</h3>
-        <h4>Somma / Differenza</h4>
-        <p>Solo tra monomi simili: si sommano i coefficienti.</p>
-        <div class="fbox">$3x^2y+5x^2y-2x^2y=(3+5-2)x^2y=6x^2y$</div>
-        <h4>Prodotto</h4>
-        <div class="fbox">$(2x^3y)\cdot(-4xy^2)=-8\,x^{4}y^{3}$</div>
-        <h4>Quoziente</h4>
-        <div class="fbox">$\dfrac{12x^5y^3}{4x^2y}=3x^3y^2$</div>
+        <h3>Operazioni con i monomi</h3>
+        <h4>Somma / differenza (solo tra simili)</h4>
+        <div class="fbox">$3x^2y+5x^2y-2x^2y=6x^2y$</div>
+        <h4>Prodotto e quoziente</h4>
+        <div class="fbox">$(2x^3y)\cdot(-4xy^2)=-8x^{4}y^{3}$ &nbsp;&nbsp; $\dfrac{12x^5y^3}{4x^2y}=3x^3y^2$</div>
         <h4>Potenza</h4>
         <div class="fbox">$(2x^2y)^3=8x^6y^3$</div>
-      </div>
-      <div class="card">
-        <h3>MCD e mcm di monomi</h3>
-        <ul>
-          <li><strong>MCD:</strong> MCD dei coefficienti × lettere comuni con esponente <em>minore</em>.</li>
-          <li><strong>mcm:</strong> mcm dei coefficienti × <em>tutte</em> le lettere con esponente <em>maggiore</em>.</li>
-        </ul>
-        <div class="ebox"><strong>Es.:</strong> $A=12x^3y^2$, $B=8x^2y^3$ &nbsp;→&nbsp; MCD$=4x^2y^2$, mcm$=24x^3y^3$</div>
+        <div class="tipbox">Ricorda: nel prodotto gli esponenti si <em>sommano</em>, nel quoziente si <em>sottraggono</em>, nella potenza si <em>moltiplicano</em>.</div>
       </div>
     </div>
-    <div id="em" class="panel"><div class="ex-mount" data-ex="monomi"></div></div>
-    <div id="qm" class="panel"><div class="quiz-mount" data-quiz="monomi"></div></div>
-  </div>
-</section>
-
-<!-- POLINOMI -->
-<section id="polinomi" class="view">
-  <div class="inner">
-    <div class="sec-header"><h2>Polinomi &amp; Ruffini</h2><p>Operazioni e divisione con schema di Ruffini</p></div>
-    <div class="tabs">
-      <button class="tab active" data-tab="tp">📚 Teoria</button>
-      <button class="tab" data-tab="ep">✏️ Esercizi guidati</button>
-      <button class="tab" data-tab="qp">🎯 Quiz (10)</button>
-    </div>
-    <div id="tp" class="panel active">
+    <div id="pre-p" class="panel">
       <div class="card">
-        <h3>Cos'è un polinomio?</h3>
-        <p>Somma algebrica di monomi non simili. Il <strong>grado</strong> è il grado del termine di grado massimo.</p>
-        <div class="fbox">$P(x)=3x^3-2x^2+5x-7$</div>
+        <h3>Polinomi</h3>
+        <p>Un <strong>polinomio</strong> è una somma algebrica di monomi non simili. Il suo <strong>grado</strong> è quello del termine di grado massimo.</p>
+        <div class="fbox">$P(x)=3x^3-2x^2+5x-7$ &nbsp;(grado $3$)</div>
+        <p>Un polinomio è <strong>ordinato</strong> se i termini seguono gli esponenti decrescenti, <strong>completo</strong> se non manca nessun grado (dal massimo fino al termine noto).</p>
       </div>
       <div class="card">
-        <h3>Somma, differenza e prodotto</h3>
+        <h3>Operazioni con i polinomi</h3>
         <div class="fbox">$(3x^2+2x-1)+(x^2-3x+4)=4x^2-x+3$</div>
         <div class="fbox">$(2x^2-x+3)-(x^2+2x-1)=x^2-3x+4$</div>
         <div class="fbox">$(x+2)(x^2-2x+4)=x^3+8$</div>
-      </div>
-      <div class="card">
-        <h3>Schema di Ruffini</h3>
-        <p>Divide $P(x)$ per un binomio $(x-a)$:</p>
-        <ol>
-          <li>Scrivi $P(x)$ ordinato e completo (usa $0$ per i termini mancanti).</li>
-          <li>Metti in fila i coefficienti; a sinistra il valore $a$.</li>
-          <li>Abbassa il primo coefficiente.</li>
-          <li>Moltiplica per $a$, somma al successivo. Ripeti.</li>
-          <li>L'ultimo numero = <strong>resto</strong>; gli altri = coefficienti del quoziente.</li>
-        </ol>
-        <div class="ebox"><strong>Es.:</strong> $(x^3-2x^2+x-2):(x-2)$, coeff. $1,-2,1,-2$, $a=2$ → quoziente $x^2+1$, resto $0$.</div>
-        <h4>Teorema del Resto</h4>
-        <p>Il resto di $P(x):(x-a)$ è $P(a)$. Se $P(a)=0$ allora $(x-a)$ è un fattore di $P(x)$.</p>
+        <div class="wbox"><strong>Occhio ai segni:</strong> davanti a una parentesi preceduta da $-$ tutti i segni interni cambiano: $-(a-b)=-a+b$.</div>
       </div>
     </div>
-    <div id="ep" class="panel"><div class="ex-mount" data-ex="polinomi"></div></div>
-    <div id="qp" class="panel"><div class="quiz-mount" data-quiz="polinomi"></div></div>
+  </div>
+</section>
+
+<!-- RACCOGLIMENTO -->
+<section id="raccoglimento" class="view">
+  <div class="inner">
+    <div class="sec-header"><h2>Raccoglimento a fattor comune</h2><p>Totale e parziale: da somma a prodotto</p></div>
+    <div class="tabs">
+      <button class="tab active" data-tab="tr">📚 Teoria</button>
+      <button class="tab" data-tab="sr">🎬 Simulazione</button>
+      <button class="tab" data-tab="xr">✏️ Esercizi</button>
+      <button class="tab" data-tab="qr">🎯 Quiz (10)</button>
+    </div>
+    <div id="tr" class="panel active">
+      <div class="card">
+        <h3>Cosa vuol dire scomporre</h3>
+        <p><strong>Scomporre</strong> un polinomio significa scriverlo come <strong>prodotto</strong> di fattori più semplici. È l'operazione inversa dello svolgere i prodotti.</p>
+        <div class="fbox">$6x+9 \;\longrightarrow\; 3(2x+3)$</div>
+      </div>
+      <div class="card">
+        <h3>1. Raccoglimento totale</h3>
+        <p>Metto in evidenza il <strong>fattore comune</strong> a <em>tutti</em> i termini: MCD dei coefficienti × lettere comuni con esponente <strong>minimo</strong>.</p>
+        <div class="fbox">$ax+ay=a(x+y)$</div>
+        <div class="ebox"><strong>Es.:</strong> $6x^2-12x=6x(x-2)$ &nbsp;&nbsp; $10a^3-15a^2=5a^2(2a-3)$</div>
+        <div class="tipbox">Verifica sempre risvolgendo il prodotto: deve tornare il polinomio di partenza.</div>
+      </div>
+      <div class="card">
+        <h3>2. Raccoglimento parziale</h3>
+        <p>Quando <em>non</em> c'è un fattore comune a tutti i termini (spesso con <strong>4 termini</strong>): li raggruppo a coppie, raccolgo in ciascun gruppo e faccio comparire una parentesi uguale.</p>
+        <div class="fbox">$ax+ay+bx+by=a(x+y)+b(x+y)=(x+y)(a+b)$</div>
+        <div class="ebox"><strong>Es.:</strong> $x^3+x^2+x+1=x^2(x+1)+(x+1)=(x+1)(x^2+1)$</div>
+        <div class="wbox"><strong>Attenzione:</strong> se dopo aver raccolto le due parentesi <em>non</em> sono uguali, prova a cambiare l'accoppiamento dei termini.</div>
+      </div>
+      <div class="card">
+        <h3>Occhio al segno</h3>
+        <p>Se il primo termine è negativo, conviene raccogliere anche il segno meno.</p>
+        <div class="ebox"><strong>Es.:</strong> $-6x^3+9x^2-3x=-3x(2x^2-3x+1)$</div>
+      </div>
+    </div>
+    <div id="sr" class="panel"><div class="sim-mount" data-sim="raccoglimento"></div></div>
+    <div id="xr" class="panel"><div class="ex-mount" data-ex="raccoglimento"></div></div>
+    <div id="qr" class="panel"><div class="quiz-mount" data-quiz="raccoglimento"></div></div>
   </div>
 </section>
 
 <!-- PRODOTTI NOTEVOLI -->
 <section id="prodotti" class="view">
   <div class="inner">
-    <div class="sec-header"><h2>Prodotti Notevoli</h2><p>Le formule da conoscere a memoria</p></div>
+    <div class="sec-header"><h2>Prodotti Notevoli</h2><p>Le formule chiave — per sviluppare e per scomporre</p></div>
     <div class="tabs">
       <button class="tab active" data-tab="tpn">📚 Teoria</button>
-      <button class="tab" data-tab="epn">✏️ Esercizi guidati</button>
+      <button class="tab" data-tab="spn">🎬 Simulazione</button>
+      <button class="tab" data-tab="xpn">✏️ Esercizi</button>
       <button class="tab" data-tab="qpn">🎯 Quiz (10)</button>
     </div>
     <div id="tpn" class="panel active">
       <div class="card">
-        <h3>Somma per differenza</h3>
-        <div class="fbox">$(a+b)(a-b)=a^2-b^2$</div>
-        <div class="ebox"><strong>Es.:</strong> $(x+3)(x-3)=x^2-9$ &nbsp;&nbsp; $(2x+5)(2x-5)=4x^2-25$</div>
+        <h3>Somma per differenza → Differenza di quadrati</h3>
+        <div class="fbox">$(a+b)(a-b)=a^2-b^2 \qquad a^2-b^2=(a+b)(a-b)$</div>
+        <div class="ebox"><strong>Sviluppo:</strong> $(2x+5)(2x-5)=4x^2-25$ &nbsp;&nbsp; <strong>Scomposizione:</strong> $x^2-9=(x+3)(x-3)$</div>
       </div>
       <div class="card">
         <h3>Quadrato di un binomio</h3>
         <div class="fbox">$(a+b)^2=a^2+2ab+b^2$<br>$(a-b)^2=a^2-2ab+b^2$</div>
         <div class="ebox"><strong>Es.:</strong> $(x+3)^2=x^2+6x+9$ &nbsp;&nbsp; $(2x-1)^2=4x^2-4x+1$</div>
+        <p>Al contrario, un <strong>trinomio quadrato perfetto</strong> si scompone come quadrato:</p>
+        <div class="fbox">$a^2\pm2ab+b^2=(a\pm b)^2$</div>
+        <div class="ebox"><strong>Es.:</strong> $x^2+6x+9=(x+3)^2$ &nbsp;&nbsp; $4x^2-12x+9=(2x-3)^2$</div>
+        <div class="wbox"><strong>Errore classico:</strong> $(a+b)^2 \neq a^2+b^2$. Manca sempre il doppio prodotto $2ab$!</div>
       </div>
       <div class="card">
         <h3>Quadrato di un trinomio</h3>
@@ -372,68 +413,64 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
         <h3>Cubo di un binomio</h3>
         <div class="fbox">$(a+b)^3=a^3+3a^2b+3ab^2+b^3$<br>$(a-b)^3=a^3-3a^2b+3ab^2-b^3$</div>
         <div class="ebox"><strong>Es.:</strong> $(x+2)^3=x^3+6x^2+12x+8$ &nbsp;&nbsp; $(x-1)^3=x^3-3x^2+3x-1$</div>
-        <div class="wbox"><strong>Attenzione:</strong> nel cubo della differenza i segni sono $+\,-\,+\,-$.</div>
+      </div>
+      <div class="card">
+        <h3>Somma e differenza di cubi</h3>
+        <div class="fbox">$a^3+b^3=(a+b)(a^2-ab+b^2)$<br>$a^3-b^3=(a-b)(a^2+ab+b^2)$</div>
+        <div class="ebox"><strong>Es.:</strong> $x^3-8=(x-2)(x^2+2x+4)$ &nbsp;&nbsp; $x^3+27=(x+3)(x^2-3x+9)$</div>
+        <div class="tipbox">Trucco per i segni: il primo fattore ha lo <em>stesso</em> segno; nel secondo il termine centrale ha segno <em>opposto</em>.</div>
       </div>
     </div>
-    <div id="epn" class="panel"><div class="ex-mount" data-ex="prodotti"></div></div>
+    <div id="spn" class="panel"><div class="sim-mount" data-sim="prodotti"></div></div>
+    <div id="xpn" class="panel"><div class="ex-mount" data-ex="prodotti"></div></div>
     <div id="qpn" class="panel"><div class="quiz-mount" data-quiz="prodotti"></div></div>
   </div>
 </section>
 
-<!-- SCOMPOSIZIONE -->
-<section id="scomposizione" class="view">
+<!-- RUFFINI -->
+<section id="ruffini" class="view">
   <div class="inner">
-    <div class="sec-header"><h2>Scomposizione in Fattori</h2><p>Da somma a prodotto: il viaggio inverso</p></div>
+    <div class="sec-header"><h2>Divisione con la regola di Ruffini</h2><p>Lo schema veloce e il teorema del resto</p></div>
     <div class="tabs">
-      <button class="tab active" data-tab="ts">📚 Teoria</button>
-      <button class="tab" data-tab="es">✏️ Esercizi guidati</button>
-      <button class="tab" data-tab="qs">🎯 Quiz (10)</button>
+      <button class="tab active" data-tab="tru">📚 Teoria</button>
+      <button class="tab" data-tab="sru">🎬 Simulazione</button>
+      <button class="tab" data-tab="xru">✏️ Esercizi</button>
+      <button class="tab" data-tab="qru">🎯 Quiz (10)</button>
     </div>
-    <div id="ts" class="panel active">
+    <div id="tru" class="panel active">
       <div class="card">
-        <h3>1. Raccoglimento totale</h3>
-        <div class="fbox">$ax+ay=a(x+y)$</div>
-        <div class="ebox"><strong>Es.:</strong> $6x^2-12x=6x(x-2)$</div>
+        <h3>A cosa serve</h3>
+        <p>La <strong>regola di Ruffini</strong> permette di dividere velocemente un polinomio $P(x)$ per un binomio del tipo $(x-a)$, senza fare la divisione in colonna.</p>
       </div>
       <div class="card">
-        <h3>2. Raccoglimento parziale</h3>
-        <div class="fbox">$ax+ay+bx+by=a(x+y)+b(x+y)=(x+y)(a+b)$</div>
-        <div class="ebox"><strong>Es.:</strong> $x^3+x^2+x+1=x^2(x+1)+(x+1)=(x+1)(x^2+1)$</div>
+        <h3>Lo schema passo per passo</h3>
+        <ol>
+          <li>Scrivi $P(x)$ <strong>ordinato e completo</strong> (metti $0$ ai termini mancanti).</li>
+          <li>Incolonna i <strong>coefficienti</strong>; a sinistra scrivi il valore $a$.</li>
+          <li><strong>Abbassa</strong> il primo coefficiente.</li>
+          <li><strong>Moltiplica</strong> per $a$ e <strong>somma</strong> al coefficiente successivo. Ripeti fino alla fine.</li>
+          <li>L'ultimo numero è il <strong>resto</strong>; gli altri sono i coefficienti del <strong>quoziente</strong> (grado abbassato di 1).</li>
+        </ol>
+        <div class="ebox"><strong>Es.:</strong> $(x^3-2x^2+x-2):(x-2)$, coefficienti $1,-2,1,-2$, $a=2$ → quoziente $x^2+1$, resto $0$.</div>
       </div>
       <div class="card">
-        <h3>3. Differenza di quadrati</h3>
-        <div class="fbox">$a^2-b^2=(a+b)(a-b)$</div>
-        <div class="ebox"><strong>Es.:</strong> $x^2-25=(x+5)(x-5)$ &nbsp;&nbsp; $9x^2-4y^2=(3x+2y)(3x-2y)$</div>
+        <h3>Il Teorema del Resto</h3>
+        <p>Il resto della divisione di $P(x)$ per $(x-a)$ è semplicemente <strong>$P(a)$</strong>: basta sostituire!</p>
+        <div class="fbox">resto di $\,P(x):(x-a)\; = \; P(a)$</div>
+        <div class="ebox"><strong>Es.:</strong> resto di $(x^3-3x+1):(x-2)$ &nbsp;→&nbsp; $P(2)=8-6+1=3$.</div>
+        <h4>Teorema del fattore</h4>
+        <p>Se $P(a)=0$, allora il resto è $0$ e $(x-a)$ è un <strong>fattore</strong> di $P(x)$: possiamo scomporlo!</p>
+        <div class="tipbox">Le eventuali radici intere vanno cercate tra i <strong>divisori del termine noto</strong>. Provale con il teorema del resto: se $P(a)=0$, hai trovato un fattore.</div>
       </div>
       <div class="card">
-        <h3>4. Somma e differenza di cubi</h3>
-        <div class="fbox">$a^3+b^3=(a+b)(a^2-ab+b^2)$<br>$a^3-b^3=(a-b)(a^2+ab+b^2)$</div>
-        <div class="ebox"><strong>Es.:</strong> $x^3-8=(x-2)(x^2+2x+4)$ &nbsp;&nbsp; $x^3+27=(x+3)(x^2-3x+9)$</div>
-      </div>
-      <div class="card">
-        <h3>5. Trinomio quadrato perfetto</h3>
-        <div class="fbox">$a^2\pm 2ab+b^2=(a\pm b)^2$</div>
-        <div class="ebox"><strong>Es.:</strong> $x^2+6x+9=(x+3)^2$ &nbsp;&nbsp; $4x^2-12x+9=(2x-3)^2$</div>
-      </div>
-      <div class="card">
-        <h3>6. Trinomio caratteristico (a = 1)</h3>
-        <p>Per $x^2+sx+p$ cerco $\alpha,\beta$ con $\alpha+\beta=s$ e $\alpha\cdot\beta=p$:</p>
-        <div class="fbox">$x^2+sx+p=(x+\alpha)(x+\beta)$</div>
-        <div class="ebox"><strong>Es.:</strong> $x^2+5x+6=(x+2)(x+3)$ perché $2+3=5$ e $2\cdot3=6$.</div>
-      </div>
-      <div class="card">
-        <h3>7. Trinomio con a ≠ 1</h3>
-        <p>Per $ax^2+bx+c$: cerco due numeri di somma $b$ e prodotto $a\cdot c$, spezzo il termine centrale, raccolgo parzialmente.</p>
-        <div class="ebox"><strong>Es.:</strong> $2x^2+5x+3$ → $a\cdot c=6$, somma $5$ → $2$ e $3$<br>$2x^2+2x+3x+3=2x(x+1)+3(x+1)=(x+1)(2x+3)$</div>
-      </div>
-      <div class="card">
-        <h3>8. Ruffini per gradi ≥ 3</h3>
-        <p>Cerco una radice $a$ tra i divisori del termine noto. Se $P(a)=0$ divido con Ruffini e scompongo il quoziente.</p>
-        <div class="ebox"><strong>Es.:</strong> $x^3-3x^2+3x-1$: provo $a=1$ → $P(1)=0$. Quoziente: $x^2-2x+1=(x-1)^2$. Risultato: $(x-1)^3$.</div>
+        <h3>Ruffini per scomporre (grado ≥ 3)</h3>
+        <p>Trovata una radice $a$ con $P(a)=0$, divido con Ruffini: $P(x)=(x-a)\cdot Q(x)$. Poi scompongo ancora il quoziente $Q(x)$.</p>
+        <div class="ebox"><strong>Es.:</strong> $x^3-6x^2+11x-6$: provo $x=1$ → $P(1)=0$. Quoziente $x^2-5x+6=(x-2)(x-3)$. Risultato: $(x-1)(x-2)(x-3)$.</div>
       </div>
     </div>
-    <div id="es" class="panel"><div class="ex-mount" data-ex="scomposizione"></div></div>
-    <div id="qs" class="panel"><div class="quiz-mount" data-quiz="scomposizione"></div></div>
+    <div id="sru" class="panel"><div class="sim-mount" data-sim="ruffini"></div></div>
+    <div id="xru" class="panel"><div class="ex-mount" data-ex="ruffini"></div></div>
+    <div id="qru" class="panel"><div class="quiz-mount" data-quiz="ruffini"></div></div>
   </div>
 </section>
 
@@ -443,20 +480,21 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
     <div class="sec-header"><h2>Frazioni Algebriche</h2><p>Frazioni con polinomi al numeratore e denominatore</p></div>
     <div class="tabs">
       <button class="tab active" data-tab="tf">📚 Teoria</button>
-      <button class="tab" data-tab="ef">✏️ Esercizi guidati</button>
+      <button class="tab" data-tab="sf">🎬 Simulazione</button>
+      <button class="tab" data-tab="xf">✏️ Esercizi</button>
       <button class="tab" data-tab="qf">🎯 Quiz (10)</button>
     </div>
     <div id="tf" class="panel active">
       <div class="card">
-        <h3>Definizione e dominio</h3>
-        <p>Una <strong>frazione algebrica</strong> è $\dfrac{A(x)}{B(x)}$ con $B(x)\neq 0$. Le <strong>C.E.</strong> sono i valori di $x$ che non annullano il denominatore.</p>
+        <h3>Definizione e condizioni di esistenza</h3>
+        <p>Una <strong>frazione algebrica</strong> è $\dfrac{A(x)}{B(x)}$ con $B(x)\neq 0$. Le <strong>C.E.</strong> (condizioni di esistenza) sono i valori di $x$ che <em>non</em> annullano il denominatore.</p>
         <div class="ebox"><strong>Es.:</strong> $\dfrac{x+2}{x-3}$ è definita per $x\neq 3$.</div>
       </div>
       <div class="card">
         <h3>Semplificazione</h3>
-        <p>Scomponi numeratore e denominatore, poi elidi i fattori comuni.</p>
+        <p>Scomponi numeratore e denominatore, poi elidi i <strong>fattori</strong> comuni.</p>
         <div class="fbox">$\dfrac{x^2-4}{x+2}=\dfrac{(x+2)(x-2)}{x+2}=x-2\quad(x\neq -2)$</div>
-        <div class="wbox"><strong>Attenzione:</strong> si semplificano solo <em>fattori</em>, mai termini di una somma!</div>
+        <div class="wbox"><strong>Attenzione:</strong> si semplificano solo i <em>fattori</em>, mai i termini di una somma!</div>
       </div>
       <div class="card">
         <h3>Prodotto e quoziente</h3>
@@ -474,7 +512,8 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
         <div class="ebox"><strong>Es.:</strong> $\dfrac{1}{x+1}+\dfrac{1}{x-1}=\dfrac{(x-1)+(x+1)}{(x+1)(x-1)}=\dfrac{2x}{x^2-1}$</div>
       </div>
     </div>
-    <div id="ef" class="panel"><div class="ex-mount" data-ex="frazioni"></div></div>
+    <div id="sf" class="panel"><div class="sim-mount" data-sim="frazioni"></div></div>
+    <div id="xf" class="panel"><div class="ex-mount" data-ex="frazioni"></div></div>
     <div id="qf" class="panel"><div class="quiz-mount" data-quiz="frazioni"></div></div>
   </div>
 </section>
@@ -482,10 +521,11 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 <!-- ESPRESSIONI -->
 <section id="espressioni" class="view">
   <div class="inner">
-    <div class="sec-header"><h2>Espressioni Algebriche</h2><p>Strategia generale e casi tipici</p></div>
+    <div class="sec-header"><h2>Espressioni Algebriche</h2><p>Mettere insieme tutti i pezzi</p></div>
     <div class="tabs">
       <button class="tab active" data-tab="te">📚 Teoria</button>
-      <button class="tab" data-tab="ee">✏️ Esercizi guidati</button>
+      <button class="tab" data-tab="se">🎬 Simulazione</button>
+      <button class="tab" data-tab="xe">✏️ Esercizi</button>
       <button class="tab" data-tab="qe">🎯 Quiz (10)</button>
     </div>
     <div id="te" class="panel active">
@@ -493,30 +533,32 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
         <h3>Strategia in 6 passi</h3>
         <ol>
           <li>Determina le <strong>C.E.</strong> (valori che annullano qualche denominatore).</li>
-          <li>Scomponi dove utile (prodotti notevoli o raccoglimenti).</li>
+          <li><strong>Scomponi</strong> dove utile (prodotti notevoli o raccoglimenti).</li>
           <li>Esegui le operazioni nelle <strong>parentesi interne</strong>.</li>
           <li>Esegui <strong>moltiplicazioni / divisioni</strong> tra frazioni.</li>
           <li>Esegui <strong>somme / differenze</strong> col m.c.m.</li>
-          <li>Semplifica il risultato finale.</li>
+          <li><strong>Semplifica</strong> il risultato finale.</li>
         </ol>
       </div>
       <div class="card">
-        <h3>Esempio guidato</h3>
+        <h3>Esempio con due metodi</h3>
         <div class="fbox">$(x+1)^2-(x-1)^2$</div>
-        <p><strong>Metodo A</strong>: sviluppo → $(x^2+2x+1)-(x^2-2x+1)=4x$.</p>
-        <p><strong>Metodo B</strong>: $A^2-B^2=(A+B)(A-B)$ con $A=x+1$, $B=x-1$ → $(2x)(2)=4x$.</p>
+        <p><strong>Metodo A</strong> — sviluppo: $(x^2+2x+1)-(x^2-2x+1)=4x$.</p>
+        <p><strong>Metodo B</strong> — differenza di quadrati: $A^2-B^2=(A+B)(A-B)$ con $A=x+1$, $B=x-1$ → $(2x)(2)=4x$.</p>
+        <div class="tipbox">Riconoscere un prodotto notevole spesso accorcia moltissimo i calcoli.</div>
       </div>
       <div class="card">
-        <h3>Errori tipici</h3>
+        <h3>Errori tipici da evitare</h3>
         <ul>
-          <li>Semplificare termini di una somma (solo i <em>fattori</em> si semplificano).</li>
-          <li>Scordare il $-$ davanti a una parentesi: $-(a-b)=-a+b$, non $-a-b$.</li>
+          <li>Semplificare i termini di una somma (solo i <em>fattori</em> si semplificano).</li>
+          <li>Dimenticare il $-$ davanti a una parentesi: $-(a-b)=-a+b$, non $-a-b$.</li>
           <li>Scrivere $(a+b)^2=a^2+b^2$: manca $2ab$!</li>
           <li>Omettere le C.E. nelle espressioni con frazioni.</li>
         </ul>
       </div>
     </div>
-    <div id="ee" class="panel"><div class="ex-mount" data-ex="espressioni"></div></div>
+    <div id="se" class="panel"><div class="sim-mount" data-sim="espressioni"></div></div>
+    <div id="xe" class="panel"><div class="ex-mount" data-ex="espressioni"></div></div>
     <div id="qe" class="panel"><div class="quiz-mount" data-quiz="espressioni"></div></div>
   </div>
 </section>
@@ -524,16 +566,16 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 </main>
 
 <script>
-/* ── NAVIGATION ── */
+/* ── SECTIONS TRACKED IN DASHBOARD ── */
 const SECTION_META = {
-  monomi:      {name:'Monomi',     color:'var(--c1)'},
-  polinomi:    {name:'Polinomi',   color:'var(--c2)'},
-  prodotti:    {name:'Prod. Not.', color:'var(--c3)'},
-  scomposizione:{name:'Scomp.',   color:'var(--c4)'},
-  frazioni:    {name:'Frazioni',   color:'var(--c5)'},
-  espressioni: {name:'Espr.',      color:'var(--c6)'}
+  raccoglimento:{name:'Raccoglimento', color:'var(--c4)'},
+  prodotti:     {name:'Prod. Not.',    color:'var(--c3)'},
+  ruffini:      {name:'Ruffini',       color:'var(--c2)'},
+  frazioni:     {name:'Frazioni',      color:'var(--c5)'},
+  espressioni:  {name:'Espressioni',   color:'var(--c6)'}
 };
 
+/* ── NAVIGATION ── */
 function goTo(id) {
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -542,19 +584,14 @@ function goTo(id) {
   window.scrollTo({top:0,behavior:'smooth'});
   if (id==='home') renderDashboard();
 }
-
 document.querySelectorAll('[data-go]').forEach(el=>{
-  el.addEventListener('click', e=>{
-    e.preventDefault();
-    goTo(el.getAttribute('data-go'));
-  });
+  el.addEventListener('click', e=>{ e.preventDefault(); goTo(el.getAttribute('data-go')); });
 });
-
 document.getElementById('nav-toggle').addEventListener('click',()=>{
   document.getElementById('topnav-links').classList.toggle('open');
 });
 
-/* ── TABS ── */
+/* ── TABS (lazy mount) ── */
 document.querySelectorAll('.tabs').forEach(bar=>{
   bar.querySelectorAll('.tab').forEach(tab=>{
     tab.addEventListener('click',()=>{
@@ -569,13 +606,15 @@ document.querySelectorAll('.tabs').forEach(bar=>{
       if (qm && !qm.dataset.mounted) { mountQuiz(qm, qm.dataset.quiz); qm.dataset.mounted='1'; }
       const em = panel.querySelector('.ex-mount');
       if (em && !em.dataset.mounted) { mountExercises(em, em.dataset.ex); em.dataset.mounted='1'; }
-      if (window.MathJax) MathJax.typesetPromise([panel]);
+      const sm = panel.querySelector('.sim-mount');
+      if (sm && !sm.dataset.mounted) { mountSim(sm, sm.dataset.sim); sm.dataset.mounted='1'; }
+      if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([panel]);
     });
   });
 });
 
 /* ── localStorage ── */
-const LS_KEY = 'calcolo_v1';
+const LS_KEY = 'calcolo_v2';
 function saveScore(key, score, total) {
   const d = JSON.parse(localStorage.getItem(LS_KEY)||'{}');
   const pct = Math.round(score/total*100);
@@ -586,7 +625,6 @@ function saveScore(key, score, total) {
   renderDashboard();
 }
 function loadScores() { return JSON.parse(localStorage.getItem(LS_KEY)||'{}'); }
-
 function renderDashboard() {
   const grid = document.getElementById('dash-grid');
   if (!grid) return;
@@ -616,56 +654,159 @@ document.getElementById('reset-btn').addEventListener('click',()=>{
 });
 renderDashboard();
 
+/* ── SIMULATIONS DATA (esempio animato passo-passo) ── */
+const SIMULATIONS = {
+  raccoglimento:{
+    title:'Raccoglimento totale — passo per passo',
+    intro:'Scomponiamo insieme $6x^3-9x^2+3x$.',
+    frames:[
+      {expr:'$6x^3-9x^2+3x$', note:'Partiamo dal polinomio da scomporre.'},
+      {expr:'$\\gcd(6,\\,9,\\,3)=3$', note:'Cerchiamo il MCD dei coefficienti.'},
+      {expr:'lettera comune: $x$', note:'Tutti i termini contengono $x$: prendo l\'esponente più piccolo, cioè $x^1$.'},
+      {expr:'fattore comune $=3x$', note:'Il fattore da raccogliere è $3x$.'},
+      {expr:'$6x^3:3x=2x^2$,&nbsp; $-9x^2:3x=-3x$,&nbsp; $3x:3x=1$', note:'Divido ogni termine per $3x$.'},
+      {expr:'$3x\\,(2x^2-3x+1)$', note:'Fatto! Prova a risvolgere: torna il polinomio di partenza. ✓', final:true}
+    ]
+  },
+  prodotti:{
+    title:'Quadrato di binomio — passo per passo',
+    intro:'Sviluppiamo $(2x+3)^2$ con la formula $(a+b)^2=a^2+2ab+b^2$.',
+    frames:[
+      {expr:'$(2x+3)^2$', note:'Individuo la struttura $(a+b)^2$.'},
+      {expr:'$a=2x,\\quad b=3$', note:'Assegno i due termini.'},
+      {expr:'$a^2=(2x)^2=4x^2$', note:'Primo termine: il quadrato di $a$.'},
+      {expr:'$2ab=2\\cdot2x\\cdot3=12x$', note:'Termine centrale: il doppio prodotto (non dimenticarlo mai!).'},
+      {expr:'$b^2=3^2=9$', note:'Ultimo termine: il quadrato di $b$.'},
+      {expr:'$4x^2+12x+9$', note:'Ecco lo sviluppo completo del quadrato. ✓', final:true}
+    ]
+  },
+  ruffini:{
+    title:'Divisione di Ruffini — passo per passo',
+    intro:'Dividiamo $(x^3-6x^2+11x-6)$ per $(x-1)$.',
+    frames:[
+      {expr:'coeff.: $1,\\;-6,\\;11,\\;-6$ &nbsp;|&nbsp; $a=1$', note:'Scrivo i coefficienti ordinati e prendo $a=1$ (da $x-1$).'},
+      {expr:'abbasso: $\\;1$', note:'Abbasso il primo coefficiente così com\'è.'},
+      {expr:'$1\\cdot1=1;\\quad -6+1=-5$', note:'Moltiplico per $a$ e sommo al coefficiente successivo.'},
+      {expr:'$-5\\cdot1=-5;\\quad 11-5=6$', note:'Ripeto: moltiplico e sommo.'},
+      {expr:'$6\\cdot1=6;\\quad -6+6=0$', note:'Ultimo passo: il risultato è $0$, quindi il resto è $0$.'},
+      {expr:'quoziente $x^2-5x+6$, &nbsp;resto $0$', note:'Resto $0$ → $(x-1)$ è un fattore! $P(x)=(x-1)(x^2-5x+6)$. ✓', final:true}
+    ]
+  },
+  frazioni:{
+    title:'Somma di frazioni — passo per passo',
+    intro:'Calcoliamo $\\dfrac{2}{x+1}+\\dfrac{3}{x-2}$.',
+    frames:[
+      {expr:'C.E.: $x\\neq-1,\\; x\\neq2$', note:'Prima cosa: i valori che annullano i denominatori sono esclusi.'},
+      {expr:'m.c.m. $=(x+1)(x-2)$', note:'I denominatori non hanno fattori comuni: il m.c.m. è il loro prodotto.'},
+      {expr:'$\\dfrac{2(x-2)+3(x+1)}{(x+1)(x-2)}$', note:'Riscrivo con il denominatore comune.'},
+      {expr:'$2x-4+3x+3$', note:'Sviluppo il numeratore.'},
+      {expr:'$=5x-1$', note:'Riduco i termini simili.'},
+      {expr:'$\\dfrac{5x-1}{(x+1)(x-2)}$', note:'Risultato finale (con $x\\neq-1,2$). ✓', final:true}
+    ]
+  },
+  espressioni:{
+    title:'Espressione con prodotto notevole — passo per passo',
+    intro:'Semplifichiamo $(x+1)^2-(x-1)^2$ nel modo più furbo.',
+    frames:[
+      {expr:'$(x+1)^2-(x-1)^2$', note:'Riconosco una differenza di quadrati $A^2-B^2$.'},
+      {expr:'$A=x+1,\\quad B=x-1$', note:'Individuo le due basi.'},
+      {expr:'$(A+B)(A-B)$', note:'Applico $A^2-B^2=(A+B)(A-B)$.'},
+      {expr:'$A+B=2x,\\quad A-B=2$', note:'Calcolo somma e differenza.'},
+      {expr:'$2x\\cdot2$', note:'Moltiplico i due risultati.'},
+      {expr:'$=4x$', note:'Risultato in pochi passaggi, senza sviluppare i quadrati! ✓', final:true}
+    ]
+  }
+};
+
+/* ── SIMULATION RENDERER ── */
+function mountSim(container, key) {
+  const sim = SIMULATIONS[key];
+  if (!sim) { container.innerHTML='<div class="card">Simulazione non disponibile.</div>'; return; }
+  container.innerHTML = `
+    <div class="sim">
+      <div class="sim-title">${sim.title}</div>
+      <div class="sim-intro">${sim.intro}</div>
+      <div class="sim-stage"><div class="sim-empty">Premi «Avvia» per vedere la costruzione passo dopo passo.</div></div>
+      <div class="sim-bar"><div class="sim-fill"></div></div>
+      <div class="sim-ctrl">
+        <button class="btn-primary sim-play">▶ Avvia</button>
+        <button class="btn-ghost sim-step">Passo ▶</button>
+        <button class="btn-ghost sim-replay">↺ Rivedi</button>
+      </div>
+    </div>`;
+  const stage = container.querySelector('.sim-stage');
+  const fill  = container.querySelector('.sim-fill');
+  const playBtn = container.querySelector('.sim-play');
+  const stepBtn = container.querySelector('.sim-step');
+  const replayBtn = container.querySelector('.sim-replay');
+  const total = sim.frames.length;
+  let shown = 0, timer = null, playing = false;
+
+  function draw() {
+    stage.innerHTML = '';
+    if (shown === 0) {
+      stage.innerHTML = '<div class="sim-empty">Premi «Avvia» per vedere la costruzione passo dopo passo.</div>';
+    } else {
+      for (let i=0;i<shown;i++) {
+        const f = sim.frames[i];
+        const d = document.createElement('div');
+        d.className = 'sim-frame' + (f.final?' final':'');
+        d.style.animationDelay = (i===shown-1?'0s':'0s');
+        d.innerHTML = `<div class="sim-expr">${f.expr}</div><div class="sim-note">${f.note}</div>`;
+        stage.appendChild(d);
+      }
+    }
+    fill.style.width = (shown/total*100)+'%';
+    if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([stage]);
+    stepBtn.disabled = shown>=total && !playing;
+  }
+  function stopPlay() {
+    playing=false; if(timer){clearInterval(timer);timer=null;}
+    playBtn.textContent='▶ Avvia'; stepBtn.disabled = shown>=total;
+  }
+  function startPlay() {
+    if (shown>=total) { shown=0; draw(); }
+    playing=true; playBtn.textContent='⏸ Pausa'; stepBtn.disabled=true;
+    timer=setInterval(()=>{
+      if (shown>=total) { stopPlay(); return; }
+      shown++; draw();
+      if (shown>=total) stopPlay();
+    }, 1700);
+  }
+  playBtn.onclick = ()=>{ if (playing) stopPlay(); else startPlay(); };
+  stepBtn.onclick = ()=>{ if (playing) return; if (shown<total){ shown++; draw(); } };
+  replayBtn.onclick = ()=>{ stopPlay(); shown=0; draw(); };
+  draw();
+}
+
 /* ── EXERCISES DATA ── */
 const EXERCISES = {
-  monomi:[
-    {num:1,title:'Prodotto di monomi',prompt:'$(3x^2y)\\cdot(-2xy^3)$',steps:[
-      {label:'Passo 1',content:'Moltiplico i coefficienti: $3\\cdot(-2)=-6$'},
-      {label:'Passo 2',content:'Sommo gli esponenti di $x$: $x^{2+1}=x^3$'},
-      {label:'Passo 3',content:'Sommo gli esponenti di $y$: $y^{1+3}=y^4$'},
-      {label:'✅ Risultato',content:'$(3x^2y)\\cdot(-2xy^3)=\\mathbf{-6x^3y^4}$',final:true}]},
-    {num:2,title:'Potenza di un monomio',prompt:'$(2a^2b)^3$',steps:[
-      {label:'Passo 1',content:'Elevo il coefficiente: $2^3=8$'},
-      {label:'Passo 2',content:'Moltiplico gli esponenti per 3: $a^{2\\cdot3}=a^6$, $b^{1\\cdot3}=b^3$'},
-      {label:'✅ Risultato',content:'$(2a^2b)^3=\\mathbf{8a^6b^3}$',final:true}]},
-    {num:3,title:'Quoziente di monomi',prompt:'$\\dfrac{15x^4y^2}{5x^2y}$',steps:[
-      {label:'Passo 1',content:'Divido i coefficienti: $15:5=3$'},
-      {label:'Passo 2',content:'Sottraggo gli esponenti: $x^{4-2}=x^2$, $y^{2-1}=y$'},
-      {label:'✅ Risultato',content:'$\\dfrac{15x^4y^2}{5x^2y}=\\mathbf{3x^2y}$',final:true}]},
-    {num:4,title:'Riduzione di termini simili',prompt:'$3x^2y-5x^2y+2x^2y$',steps:[
-      {label:'Passo 1',content:'Verifico: tutti hanno parte letterale $x^2y$ ✓'},
-      {label:'Passo 2',content:'Sommo i coefficienti: $3-5+2=0$'},
-      {label:'✅ Risultato',content:'$3x^2y-5x^2y+2x^2y=\\mathbf{0}$',final:true}]},
-    {num:5,title:'MCD e mcm di monomi',prompt:'Di $8a^3b^2$ e $12a^2b^4$',steps:[
-      {label:'Passo 1',content:'Coefficienti: $\\gcd(8,12)=4$, $\\text{mcm}(8,12)=24$'},
-      {label:'Passo 2',content:'MCD — esponenti minimi: $a^{\\min(3,2)}=a^2$, $b^{\\min(2,4)}=b^2$'},
-      {label:'Passo 3',content:'mcm — esponenti massimi: $a^{\\max(3,2)}=a^3$, $b^{\\max(2,4)}=b^4$'},
-      {label:'✅ Risultato',content:'$\\text{MCD}=\\mathbf{4a^2b^2}$ &nbsp;&nbsp; $\\text{mcm}=\\mathbf{24a^3b^4}$',final:true}]}
-  ],
-  polinomi:[
-    {num:1,title:'Somma di polinomi',prompt:'$(2x^2-3x+1)+(x^2+2x-5)$',steps:[
-      {label:'Passo 1',content:'Tolgo le parentesi: $2x^2-3x+1+x^2+2x-5$'},
-      {label:'Passo 2',content:'Raggruppo i simili: $(2x^2+x^2)+(-3x+2x)+(1-5)$'},
-      {label:'✅ Risultato',content:'$\\mathbf{3x^2-x-4}$',final:true}]},
-    {num:2,title:'Prodotto di binomi',prompt:'$(x+2)(x-3)$',steps:[
-      {label:'Passo 1',content:'Moltiplico ogni termine del primo per ogni termine del secondo'},
-      {label:'Passo 2',content:'$x\\cdot x=x^2$, $x\\cdot(-3)=-3x$, $2\\cdot x=2x$, $2\\cdot(-3)=-6$'},
-      {label:'Passo 3',content:'Riduco i simili: $x^2+(-3x+2x)-6$'},
-      {label:'✅ Risultato',content:'$\\mathbf{x^2-x-6}$',final:true}]},
-    {num:3,title:'Ruffini: divisione completa',prompt:'$(x^3-6x^2+11x-6):(x-1)$',steps:[
-      {label:'Passo 1',content:'Coefficienti: $1,\\,-6,\\,11,\\,-6$. &nbsp;Valore $a=1$'},
-      {label:'Passo 2',content:'Ruffini: $1\\,|\\,{-6+1=-5}\\,|\\,{11-5=6}\\,|\\,{-6+6=0}$ &nbsp;→ resto $0$'},
-      {label:'Passo 3',content:'Quoziente: $x^2-5x+6=(x-2)(x-3)$'},
-      {label:'✅ Risultato',content:'$\\mathbf{(x-1)(x-2)(x-3)}$',final:true}]},
-    {num:4,title:'Ruffini con trinomio perfetto',prompt:'$(x^3+x^2-x-1):(x-1)$',steps:[
-      {label:'Passo 1',content:'Coefficienti: $1,1,-1,-1$. &nbsp;$a=1$'},
-      {label:'Passo 2',content:'Schema: $1\\to2\\to1\\to0$ → quoziente $x^2+2x+1$, resto $0$'},
-      {label:'Passo 3',content:'Quoziente: $x^2+2x+1=(x+1)^2$'},
-      {label:'✅ Risultato',content:'$\\mathbf{(x-1)(x+1)^2}$',final:true}]},
-    {num:5,title:'Teorema del resto',prompt:'Resto di $P(x)=x^3-3x+1$ diviso per $(x-2)$',steps:[
-      {label:'Passo 1',content:'Per il teorema del resto, il resto $= P(2)$'},
-      {label:'Passo 2',content:'$P(2)=2^3-3\\cdot2+1=8-6+1$'},
-      {label:'✅ Risultato',content:'Resto $=\\mathbf{3}$',final:true}]}
+  raccoglimento:[
+    {num:1,title:'Raccoglimento totale',prompt:'$12x^3y-8x^2y^2+4xy^3$',steps:[
+      {label:'Passo 1',content:'MCD dei coefficienti: $\\gcd(12,8,4)=4$'},
+      {label:'Passo 2',content:'Parte letterale comune (esponenti minimi): $xy$'},
+      {label:'Passo 3',content:'Divido ogni termine per $4xy$: $\\;3x^2,\\;-2xy,\\;y^2$'},
+      {label:'✅ Risultato',content:'$\\mathbf{4xy(3x^2-2xy+y^2)}$',final:true}]},
+    {num:2,title:'Raccoglimento con segno negativo',prompt:'$-6x^3+9x^2-3x$',steps:[
+      {label:'Passo 1',content:'Il primo termine è negativo: conviene raccogliere anche il segno $-$.'},
+      {label:'Passo 2',content:'Fattore comune: $3x$ → raccolgo $-3x$'},
+      {label:'Passo 3',content:'$-6x^3:(-3x)=2x^2$,&nbsp; $9x^2:(-3x)=-3x$,&nbsp; $-3x:(-3x)=1$'},
+      {label:'✅ Risultato',content:'$\\mathbf{-3x(2x^2-3x+1)}$',final:true}]},
+    {num:3,title:'Raccoglimento parziale (4 termini)',prompt:'$x^3+x^2+x+1$',steps:[
+      {label:'Passo 1',content:'Raggruppo a coppie: $(x^3+x^2)+(x+1)$'},
+      {label:'Passo 2',content:'Raccolgo in ciascun gruppo: $x^2(x+1)+1\\,(x+1)$'},
+      {label:'Passo 3',content:'Ora $(x+1)$ è comune: lo raccolgo'},
+      {label:'✅ Risultato',content:'$\\mathbf{(x+1)(x^2+1)}$',final:true}]},
+    {num:4,title:'Raccoglimento parziale',prompt:'$ax+ay+bx+by$',steps:[
+      {label:'Passo 1',content:'Raggruppo: $(ax+ay)+(bx+by)$'},
+      {label:'Passo 2',content:'Raccolgo: $a(x+y)+b(x+y)$'},
+      {label:'Passo 3',content:'Metto in evidenza $(x+y)$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(x+y)(a+b)}$',final:true}]},
+    {num:5,title:'Parziale con riordino',prompt:'$2x^3-x^2+6x-3$',steps:[
+      {label:'Passo 1',content:'Raggruppo: $(2x^3-x^2)+(6x-3)$'},
+      {label:'Passo 2',content:'Raccolgo: $x^2(2x-1)+3(2x-1)$'},
+      {label:'Passo 3',content:'Comune $(2x-1)$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(2x-1)(x^2+3)}$',final:true}]}
   ],
   prodotti:[
     {num:1,title:'Quadrato di un binomio',prompt:'$(3x+2)^2$',steps:[
@@ -676,44 +817,45 @@ const EXERCISES = {
       {label:'Passo 1',content:'Forma $(a-b)(a+b)$ con $a=2x$, $b=y$'},
       {label:'Passo 2',content:'$a^2-b^2=(2x)^2-y^2$'},
       {label:'✅ Risultato',content:'$\\mathbf{4x^2-y^2}$',final:true}]},
-    {num:3,title:'Quadrato di un trinomio',prompt:'$(x+y+2)^2$',steps:[
-      {label:'Passo 1',content:'Formula: $a^2+b^2+c^2+2ab+2ac+2bc$'},
-      {label:'Passo 2',content:'Quadrati: $x^2+y^2+4$'},
-      {label:'Passo 3',content:'Doppi prodotti: $2xy+4x+4y$'},
-      {label:'✅ Risultato',content:'$\\mathbf{x^2+y^2+2xy+4x+4y+4}$',final:true}]},
-    {num:4,title:'Cubo di un binomio',prompt:'$(2x-1)^3$',steps:[
+    {num:3,title:'Cubo di un binomio',prompt:'$(2x-1)^3$',steps:[
       {label:'Passo 1',content:'$(a-b)^3=a^3-3a^2b+3ab^2-b^3$ con $a=2x$, $b=1$'},
-      {label:'Passo 2',content:'$8x^3 - 3\\cdot4x^2\\cdot1 + 3\\cdot2x\\cdot1 - 1$'},
+      {label:'Passo 2',content:'$8x^3-3\\cdot4x^2\\cdot1+3\\cdot2x\\cdot1-1$'},
       {label:'✅ Risultato',content:'$\\mathbf{8x^3-12x^2+6x-1}$',final:true}]},
-    {num:5,title:'Riconosci la somma di cubi',prompt:'$(x+1)(x^2-x+1)$',steps:[
-      {label:'Passo 1',content:'Forma $(a+b)(a^2-ab+b^2)$ con $a=x$, $b=1$'},
-      {label:'Passo 2',content:'Verifico: $a^2=x^2$ ✓, $-ab=-x$ ✓, $b^2=1$ ✓'},
-      {label:'✅ Risultato',content:'$x^3+1^3=\\mathbf{x^3+1}$',final:true}]}
+    {num:4,title:'Scomporre una differenza di quadrati',prompt:'$9x^2-16$',steps:[
+      {label:'Passo 1',content:'Riconosco: $9x^2=(3x)^2$, $16=4^2$'},
+      {label:'Passo 2',content:'$a^2-b^2=(a+b)(a-b)$ con $a=3x$, $b=4$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(3x+4)(3x-4)}$',final:true}]},
+    {num:5,title:'Scomporre una differenza di cubi',prompt:'$x^3-27$',steps:[
+      {label:'Passo 1',content:'Riconosco: $x^3-3^3$, quindi $a=x$, $b=3$'},
+      {label:'Passo 2',content:'$a^3-b^3=(a-b)(a^2+ab+b^2)$'},
+      {label:'Passo 3',content:'$(x-3)(x^2+3x+9)$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(x-3)(x^2+3x+9)}$',final:true}]}
   ],
-  scomposizione:[
-    {num:1,title:'Raccoglimento totale',prompt:'$12x^3y-8x^2y^2+4xy^3$',steps:[
-      {label:'Passo 1',content:'MCD coefficienti: $\\gcd(12,8,4)=4$'},
-      {label:'Passo 2',content:'Parte letterale comune: $xy$ (esponenti minimi)'},
-      {label:'Passo 3',content:'Divido ogni termine per $4xy$: $3x^2,\\,-2xy,\\,y^2$'},
-      {label:'✅ Risultato',content:'$\\mathbf{4xy(3x^2-2xy+y^2)}$',final:true}]},
-    {num:2,title:'Differenza di quadrati',prompt:'$4x^2-9y^2$',steps:[
-      {label:'Passo 1',content:'Riconosco: $4x^2=(2x)^2$, $9y^2=(3y)^2$'},
-      {label:'Passo 2',content:'$a^2-b^2=(a+b)(a-b)$ con $a=2x$, $b=3y$'},
-      {label:'✅ Risultato',content:'$\\mathbf{(2x+3y)(2x-3y)}$',final:true}]},
-    {num:3,title:'Trinomio caratteristico',prompt:'$x^2-7x+12$',steps:[
-      {label:'Passo 1',content:'Cerco $\\alpha,\\beta$: somma $-7$, prodotto $12$'},
-      {label:'Passo 2',content:'Provo: $-3$ e $-4$ → $-3+(-4)=-7$ ✓, $(-3)(-4)=12$ ✓'},
-      {label:'✅ Risultato',content:'$\\mathbf{(x-3)(x-4)}$',final:true}]},
-    {num:4,title:'Trinomio con a ≠ 1',prompt:'$3x^2-7x+2$',steps:[
-      {label:'Passo 1',content:'$a\\cdot c=3\\cdot2=6$; cerco somma $-7$, prodotto $6$: sono $-1$ e $-6$'},
-      {label:'Passo 2',content:'Spezzo: $3x^2-x-6x+2$'},
-      {label:'Passo 3',content:'Raccolgo: $x(3x-1)-2(3x-1)$'},
-      {label:'✅ Risultato',content:'$\\mathbf{(3x-1)(x-2)}$',final:true}]},
-    {num:5,title:'Ruffini per scomposizione',prompt:'$x^3-6x^2+11x-6$',steps:[
-      {label:'Passo 1',content:'Divisori di $-6$: $\\pm1,\\pm2,\\pm3,\\pm6$. Provo $x=1$: $1-6+11-6=0$ ✓'},
+  ruffini:[
+    {num:1,title:'Divisione completa',prompt:'$(x^3-6x^2+11x-6):(x-1)$',steps:[
+      {label:'Passo 1',content:'Coefficienti: $1,\\,-6,\\,11,\\,-6$. &nbsp;Valore $a=1$'},
+      {label:'Passo 2',content:'Schema: $1\\to-6+1=-5\\to11-5=6\\to-6+6=0$'},
+      {label:'Passo 3',content:'Quoziente $x^2-5x+6$, resto $0$'},
+      {label:'✅ Risultato',content:'Quoziente $\\mathbf{x^2-5x+6}$, &nbsp;resto $\\mathbf{0}$',final:true}]},
+    {num:2,title:'Teorema del resto',prompt:'Resto di $P(x)=x^3-3x+1$ diviso $(x-2)$',steps:[
+      {label:'Passo 1',content:'Per il teorema del resto: resto $=P(2)$'},
+      {label:'Passo 2',content:'$P(2)=2^3-3\\cdot2+1=8-6+1$'},
+      {label:'✅ Risultato',content:'Resto $=\\mathbf{3}$',final:true}]},
+    {num:3,title:'Scomposizione con Ruffini',prompt:'$x^3-6x^2+11x-6$',steps:[
+      {label:'Passo 1',content:'Cerco una radice tra i divisori di $-6$: provo $x=1$ → $P(1)=1-6+11-6=0$ ✓'},
       {label:'Passo 2',content:'Ruffini → quoziente $x^2-5x+6$'},
-      {label:'Passo 3',content:'Scompongo quoziente: $(x-2)(x-3)$'},
-      {label:'✅ Risultato',content:'$\\mathbf{(x-1)(x-2)(x-3)}$',final:true}]}
+      {label:'Passo 3',content:'Scompongo il quoziente: $(x-2)(x-3)$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(x-1)(x-2)(x-3)}$',final:true}]},
+    {num:4,title:'Ruffini + quadrato perfetto',prompt:'$(x^3+x^2-x-1):(x-1)$',steps:[
+      {label:'Passo 1',content:'Coefficienti $1,1,-1,-1$, &nbsp;$a=1$'},
+      {label:'Passo 2',content:'Schema: $1\\to2\\to1\\to0$ → quoziente $x^2+2x+1$, resto $0$'},
+      {label:'Passo 3',content:'$x^2+2x+1=(x+1)^2$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(x-1)(x+1)^2}$',final:true}]},
+    {num:5,title:'Trova la radice e scomponi',prompt:'$x^3-7x+6$',steps:[
+      {label:'Passo 1',content:'Divisori di $6$: $\\pm1,\\pm2,\\pm3,\\pm6$. Provo $x=1$: $1-7+6=0$ ✓'},
+      {label:'Passo 2',content:'Ruffini (coeff. $1,0,-7,6$) → quoziente $x^2+x-6$'},
+      {label:'Passo 3',content:'$x^2+x-6=(x+3)(x-2)$'},
+      {label:'✅ Risultato',content:'$\\mathbf{(x-1)(x-2)(x+3)}$',final:true}]}
   ],
   frazioni:[
     {num:1,title:'Semplificazione',prompt:'$\\dfrac{x^2-x-6}{x+2}$',steps:[
@@ -735,7 +877,7 @@ const EXERCISES = {
     {num:4,title:'Differenza di frazioni',prompt:'$\\dfrac{x}{x+1}-\\dfrac{1}{x}$',steps:[
       {label:'C.E.',content:'$x\\neq0$, $x\\neq-1$'},
       {label:'Passo 1',content:'m.c.m.: $x(x+1)$'},
-      {label:'Passo 2',content:'$\\dfrac{x^2-(x+1)}{x(x+1)}=\\dfrac{x^2-x-1}{x(x+1)}$'},
+      {label:'Passo 2',content:'$\\dfrac{x\\cdot x-(x+1)}{x(x+1)}=\\dfrac{x^2-x-1}{x(x+1)}$'},
       {label:'✅ Risultato',content:'$\\dfrac{\\mathbf{x^2-x-1}}{x(x+1)}$',final:true}]},
     {num:5,title:'C.E. e semplificazione',prompt:'$\\dfrac{x^2-9}{x^2+5x+6}$',steps:[
       {label:'Passo 1',content:'Scompongo: $x^2-9=(x+3)(x-3)$, $x^2+5x+6=(x+2)(x+3)$'},
@@ -780,117 +922,101 @@ function mountExercises(container, key) {
     const card = document.createElement('div');
     card.className = 'ex-card';
     let revealed = 0;
-    function build() {
-      card.innerHTML = `
-        <div class="ex-num">Esercizio ${ex.num}</div>
-        <div class="ex-title">${ex.title}</div>
-        <div class="ex-prompt">${ex.prompt}</div>
-        <div class="steps-wrap"></div>
-        <div class="ex-actions">
-          <button class="btn-ghost step-btn">Passo successivo ▶</button>
-          <button class="btn-ghost all-btn">Mostra tutto</button>
-          <button class="btn-ghost res-btn">Ricomincia ↺</button>
-        </div>`;
-      const sw = card.querySelector('.steps-wrap');
-      const stepBtn = card.querySelector('.step-btn');
-      const allBtn  = card.querySelector('.all-btn');
-      const resBtn  = card.querySelector('.res-btn');
-      function renderSteps() {
-        sw.innerHTML = '';
-        for (let i=0;i<revealed;i++) {
-          const s = ex.steps[i];
-          const d = document.createElement('div');
-          d.className = (s.final ? 'ex-final' : 'ex-step') + ' shown';
-          d.innerHTML = `<span class="step-label">${s.label}</span><div class="step-content">${s.content}</div>`;
-          sw.appendChild(d);
-        }
-        if (window.MathJax) MathJax.typesetPromise([sw]);
-        stepBtn.disabled = revealed >= ex.steps.length;
+    card.innerHTML = `
+      <div class="ex-num">Esercizio ${ex.num}</div>
+      <div class="ex-title">${ex.title}</div>
+      <div class="ex-prompt">${ex.prompt}</div>
+      <div class="steps-wrap"></div>
+      <div class="ex-actions">
+        <button class="btn-ghost step-btn">Passo successivo ▶</button>
+        <button class="btn-ghost all-btn">Mostra tutto</button>
+        <button class="btn-ghost res-btn">Ricomincia ↺</button>
+      </div>`;
+    const sw = card.querySelector('.steps-wrap');
+    const stepBtn = card.querySelector('.step-btn');
+    const allBtn  = card.querySelector('.all-btn');
+    const resBtn  = card.querySelector('.res-btn');
+    function renderSteps() {
+      sw.innerHTML = '';
+      for (let i=0;i<revealed;i++) {
+        const s = ex.steps[i];
+        const d = document.createElement('div');
+        d.className = (s.final ? 'ex-final' : 'ex-step') + ' shown';
+        d.innerHTML = `<span class="step-label">${s.label}</span><div class="step-content">${s.content}</div>`;
+        sw.appendChild(d);
       }
-      stepBtn.onclick = () => { if (revealed < ex.steps.length) { revealed++; renderSteps(); } };
-      allBtn.onclick  = () => { revealed = ex.steps.length; renderSteps(); };
-      resBtn.onclick  = () => { revealed = 0; renderSteps(); };
-      renderSteps();
+      if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([sw]);
+      stepBtn.disabled = revealed >= ex.steps.length;
     }
-    build();
+    stepBtn.onclick = () => { if (revealed < ex.steps.length) { revealed++; renderSteps(); } };
+    allBtn.onclick  = () => { revealed = ex.steps.length; renderSteps(); };
+    resBtn.onclick  = () => { revealed = 0; renderSteps(); };
     container.appendChild(card);
   });
-  if (window.MathJax) MathJax.typesetPromise([container]);
+  if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([container]);
 }
 
 /* ── QUIZ DATA ── */
 const QUIZZES = {
-  monomi:[
-    {type:'teorico',q:'Quale espressione è un monomio?',choices:['$3x+2y$','$\\dfrac{5}{x}$','$-4x^2y^3$','$x^{1/2}$'],correct:2,expl:'Un monomio ha esponenti interi non negativi: $-4x^2y^3$ è l\'unica valida.'},
-    {type:'teorico',q:'Grado del monomio $4x^3y^2z$?',choices:['$3$','$5$','$6$','$24$'],correct:2,expl:'$3+2+1=6$.'},
-    {type:'pratico',q:'Calcola $3x^2y\\cdot2xy^3$.',choices:['$5x^3y^4$','$6x^3y^4$','$6x^2y^3$','$6x^3y^3$'],correct:1,expl:'$3\\cdot2=6$, $x^{2+1}=x^3$, $y^{1+3}=y^4$.'},
-    {type:'pratico',q:'Calcola $\\dfrac{12x^5y^3}{4x^2y}$.',choices:['$3x^3y^2$','$3x^7y^4$','$8x^3y^2$','$3x^3y^3$'],correct:0,expl:'$12:4=3$, $x^{5-2}=x^3$, $y^{3-1}=y^2$.'},
-    {type:'teorico',q:'Quando si possono sommare due monomi?',choices:['Stesso coefficiente','Stessa parte letterale','Sempre','Stesso grado'],correct:1,expl:'Si sommano solo monomi simili (stessa parte letterale).'},
-    {type:'pratico',q:'Calcola $(2x^2y)^3$.',choices:['$2x^6y^3$','$8x^5y^4$','$8x^6y^3$','$6x^6y^3$'],correct:2,expl:'$2^3=8$, $x^{2\\cdot3}=x^6$, $y^{1\\cdot3}=y^3$.'},
-    {type:'pratico',q:'MCD tra $12x^3y^2$ e $8x^2y^3$.',choices:['$4x^2y^2$','$24x^3y^3$','$4x^3y^3$','$2x^2y^2$'],correct:0,expl:'$\\gcd(12,8)=4$, esponenti minimi: $x^2y^2$.'},
-    {type:'pratico',q:'Calcola $(-5ab^2)\\cdot(3a^2b)$.',choices:['$-15a^3b^3$','$15a^3b^3$','$-15a^2b^2$','$-2a^3b^3$'],correct:0,expl:'$(-5)(3)=-15$, $a^3$, $b^3$.'},
-    {type:'pratico',q:'Riduci $5x^2y-7x^2y+3x^2y$.',choices:['$x^2y$','$11x^2y$','$x^6y^3$','$15x^2y$'],correct:0,expl:'$5-7+3=1$.'},
-    {type:'teorico',q:'Grado del monomio $-7$?',choices:['Nessuno','$0$','$1$','$-7$'],correct:1,expl:'Una costante non nulla è un monomio di grado $0$.'}
-  ],
-  polinomi:[
-    {type:'teorico',q:'Cos\'è un polinomio?',choices:['Prodotto di monomi','Somma di monomi non simili','Frazione di monomi','Equazione'],correct:1,expl:'Somma algebrica di monomi (non simili tra loro).'},
-    {type:'pratico',q:'$(3x^2+2x-1)+(x^2-3x+4)=$?',choices:['$4x^2-x+3$','$4x^2+5x+3$','$3x^2-x+3$','$4x^2-x-5$'],correct:0,expl:'$4x^2-x+3$.'},
-    {type:'pratico',q:'$(2x^2-x+3)-(x^2+2x-1)=$?',choices:['$x^2-3x+4$','$x^2+x+2$','$x^2-3x+2$','$3x^2+x+2$'],correct:0,expl:'Cambio segni: $x^2-3x+4$.'},
-    {type:'pratico',q:'$(x+2)(x^2-2x+4)=$?',choices:['$x^3+8$','$x^3-8$','$x^3+4x+8$','$x^3-4x^2+8$'],correct:0,expl:'Somma di cubi: $x^3+2^3=x^3+8$.'},
-    {type:'teorico',q:'Il Teorema del Resto afferma che:',choices:['Il resto di $P(x):(x-a)$ è $P(a)$','Il quoziente è $P(a)$','Il resto è sempre $0$','Il resto è il grado di $P$'],correct:0,expl:'Il resto = $P(a)$.'},
-    {type:'pratico',q:'Ruffini: $(x^3-2x^2+x-2):(x-2)$ → quoziente?',choices:['$x^2-1$','$x^2+1$','$x^2-2x+1$','$x^2+x+1$'],correct:1,expl:'Quoziente $x^2+1$, resto $0$.'},
-    {type:'pratico',q:'Resto di $(x^3+3x^2-4):(x-1)$?',choices:['$0$','$1$','$-4$','$2$'],correct:0,expl:'$P(1)=1+3-4=0$.'},
-    {type:'pratico',q:'$(2x-3)(x+1)=$?',choices:['$2x^2-x-3$','$2x^2+x-3$','$2x^2-3x-3$','$2x^2-2x-3$'],correct:0,expl:'$2x^2+2x-3x-3=2x^2-x-3$.'},
-    {type:'teorico',q:'Un polinomio è "completo" se:',choices:['Ha grado $\\geq2$','Contiene tutti i termini da grado $0$ al massimo','Ha solo termini di grado pari','Ha grado dispari'],correct:1,expl:'Completo = nessun termine mancante.'},
-    {type:'pratico',q:'$x^3-8:(x-2)$ → quoziente?',choices:['$x^2+2x+4$','$x^2-2x+4$','$x^2+4$','$x^2+2x-4$'],correct:0,expl:'Differenza di cubi: $(x-2)(x^2+2x+4)$.'}
+  raccoglimento:[
+    {type:'teorico',q:'Raccogliere a fattor comune significa:',choices:['Sviluppare i prodotti','Scrivere il polinomio come prodotto','Sommare i monomi simili','Calcolare il valore numerico'],correct:1,expl:'Si mette in evidenza un fattore comune, trasformando una somma in un prodotto.'},
+    {type:'pratico',q:'Scomponi $6x^2-12x$.',choices:['$6x(x-2)$','$6(x^2-2x)$','$6x(x-12)$','$x(6x-12)$'],correct:0,expl:'Fattore comune $6x$: $6x(x-2)$.'},
+    {type:'pratico',q:'Scomponi $15a^3b-10a^2b^2$.',choices:['$5a^2b(3a-2b)$','$5ab(3a^2-2b)$','$5a^2b(3-2b)$','$a^2b(15a-10b)$'],correct:0,expl:'MCD $=5a^2b$: $5a^2b(3a-2b)$.'},
+    {type:'teorico',q:'Il raccoglimento parziale si usa tipicamente quando:',choices:['C\'è un solo termine','Ci sono 4 termini senza fattore comune a tutti','Il grado è 2','Ci sono frazioni'],correct:1,expl:'Si raggruppa a coppie per far comparire una parentesi comune.'},
+    {type:'pratico',q:'Scomponi $x^3+x^2+x+1$.',choices:['$(x+1)(x^2+1)$','$(x-1)(x^2+1)$','$(x+1)^3$','$(x^2+1)^2$'],correct:0,expl:'$x^2(x+1)+(x+1)=(x+1)(x^2+1)$.'},
+    {type:'pratico',q:'Scomponi $-4x^2+8x$ raccogliendo anche il segno.',choices:['$-4x(x-2)$','$4x(x-2)$','$-4x(x+2)$','$-4(x^2-2x)$'],correct:0,expl:'Raccolgo $-4x$: $-4x(x-2)$.'},
+    {type:'pratico',q:'Scomponi $ax+ay+bx+by$.',choices:['$(a+b)(x+y)$','$(a-b)(x+y)$','$(a+b)(x-y)$','$ab(x+y)$'],correct:0,expl:'$a(x+y)+b(x+y)=(a+b)(x+y)$.'},
+    {type:'teorico',q:'Nel fattore comune letterale, ogni lettera compare con esponente:',choices:['Massimo','Minimo tra quelli presenti','La somma degli esponenti','Sempre 1'],correct:1,expl:'Si prende l\'esponente più piccolo con cui la lettera appare in tutti i termini.'},
+    {type:'pratico',q:'Scomponi $12x^3y-8x^2y^2+4xy^3$.',choices:['$4xy(3x^2-2xy+y^2)$','$4x^2y(3x-2y+y^2)$','$2xy(6x^2-4xy+2y^2)$','$4xy(3x^2-2y+y^2)$'],correct:0,expl:'MCD $=4xy$: $4xy(3x^2-2xy+y^2)$.'},
+    {type:'pratico',q:'Scomponi $2x(a-b)+3(a-b)$.',choices:['$(a-b)(2x+3)$','$(a-b)(2x-3)$','$(a+b)(2x+3)$','$(2x+3)(a+b)$'],correct:0,expl:'$(a-b)$ è già in evidenza: $(a-b)(2x+3)$.'}
   ],
   prodotti:[
     {type:'teorico',q:'$(a+b)(a-b)=$?',choices:['$a^2+b^2$','$a^2-b^2$','$a^2-2ab+b^2$','$a^2+2ab+b^2$'],correct:1,expl:'Somma per differenza: $a^2-b^2$.'},
-    {type:'teorico',q:'$(a+b)^2=$?',choices:['$a^2+b^2$','$a^2+ab+b^2$','$a^2+2ab+b^2$','$a^2-2ab+b^2$'],correct:2,expl:'$a^2+2ab+b^2$.'},
     {type:'pratico',q:'$(x+3)^2=$?',choices:['$x^2+9$','$x^2+6x+9$','$x^2+3x+9$','$x^2+6x+3$'],correct:1,expl:'$x^2+2\\cdot x\\cdot3+9=x^2+6x+9$.'},
-    {type:'pratico',q:'$(x+2)(x-2)=$?',choices:['$x^2-4$','$x^2+4$','$x^2-4x+4$','$x^2-2$'],correct:0,expl:'$x^2-4$.'},
-    {type:'teorico',q:'$(a+b+c)^2$ contiene:',choices:['Solo i quadrati','$a^2+b^2+c^2$','$a^2+b^2+c^2+2ab+2ac+2bc$','$a^2+b^2+c^2+abc$'],correct:2,expl:'Quadrati + tutti i doppi prodotti.'},
     {type:'pratico',q:'$(2x-1)^2=$?',choices:['$4x^2-1$','$4x^2-2x+1$','$4x^2-4x+1$','$2x^2-4x+1$'],correct:2,expl:'$4x^2-4x+1$.'},
-    {type:'teorico',q:'$(a-b)^3=$?',choices:['$a^3-b^3$','$a^3-3a^2b+3ab^2-b^3$','$a^3-3a^2b-3ab^2-b^3$','$a^3+3a^2b-3ab^2+b^3$'],correct:1,expl:'Segni: $+\\,-\\,+\\,-$.'},
+    {type:'pratico',q:'Scomponi $x^2-25$.',choices:['$(x-5)^2$','$(x+5)(x-5)$','$(x+25)(x-1)$','$(x+5)^2$'],correct:1,expl:'Differenza di quadrati: $(x+5)(x-5)$.'},
+    {type:'teorico',q:'$(a-b)^3=$?',choices:['$a^3-b^3$','$a^3-3a^2b+3ab^2-b^3$','$a^3-3a^2b-3ab^2-b^3$','$a^3+3a^2b-3ab^2+b^3$'],correct:1,expl:'I segni si alternano: $+\\,-\\,+\\,-$.'},
     {type:'pratico',q:'$(x-1)^3=$?',choices:['$x^3-1$','$x^3-3x^2+3x-1$','$x^3+3x^2-3x-1$','$x^3-3x+1$'],correct:1,expl:'$x^3-3x^2+3x-1$.'},
-    {type:'pratico',q:'$(x+y+1)^2=$?',choices:['$x^2+y^2+1$','$x^2+y^2+1+2xy+2x+2y$','$x^2+y^2+1+xy+x+y$','$x^2+y^2+2xy+1$'],correct:1,expl:'Tutti i quadrati e tutti i doppi prodotti.'},
-    {type:'pratico',q:'$(3x+2y)(3x-2y)=$?',choices:['$9x^2-4y^2$','$9x^2+4y^2$','$9x^2-12xy+4y^2$','$3x^2-2y^2$'],correct:0,expl:'$9x^2-4y^2$.'}
-  ],
-  scomposizione:[
-    {type:'teorico',q:'Scomporre in fattori significa:',choices:['Sviluppare i prodotti','Scrivere come prodotto di polinomi di grado inferiore','Sostituire numeri','Calcolare il valore'],correct:1,expl:'Trasformare una somma in un prodotto.'},
-    {type:'pratico',q:'Scomponi $6x^2-12x$.',choices:['$6x(x-2)$','$6(x^2-2x)$','$6x(x-12)$','$x(6x-12)$'],correct:0,expl:'MCD $=6x$: $6x(x-2)$.'},
-    {type:'pratico',q:'Scomponi $x^2-9$.',choices:['$(x-3)^2$','$(x+3)(x-3)$','$(x-9)(x+1)$','$(x+3)^2$'],correct:1,expl:'Differenza di quadrati.'},
-    {type:'pratico',q:'Scomponi $x^2+5x+6$.',choices:['$(x+2)(x+3)$','$(x+1)(x+6)$','$(x+2)^2+1$','$(x-2)(x-3)$'],correct:0,expl:'$2+3=5$, $2\\cdot3=6$.'},
-    {type:'pratico',q:'Scomponi $x^2+6x+9$.',choices:['$(x+3)^2$','$(x+9)(x+1)$','$(x-3)^2$','$(x+6)(x+3)$'],correct:0,expl:'Trinomio quadrato perfetto: $(x+3)^2$.'},
     {type:'pratico',q:'Scomponi $x^3-8$.',choices:['$(x-2)^3$','$(x-2)(x^2-2x+4)$','$(x-2)(x^2+2x+4)$','$(x+2)(x^2-2x+4)$'],correct:2,expl:'Differenza di cubi: $(x-2)(x^2+2x+4)$.'},
-    {type:'pratico',q:'Scomponi $2x^2+5x+3$.',choices:['$(2x+1)(x+3)$','$(x+1)(2x+3)$','$(2x+3)(x-1)$','$(2x-1)(x-3)$'],correct:1,expl:'$a\\cdot c=6$, somma $5$: $2$ e $3$ → $(x+1)(2x+3)$.'},
-    {type:'teorico',q:'Ruffini per gradi $\\geq3$ richiede:',choices:['Sempre','Trovare una radice del polinomio','Solo per grado 4','Per frazioni'],correct:1,expl:'Si cerca una radice $a$ tra i divisori del termine noto.'},
-    {type:'pratico',q:'Scomponi $x^3-3x^2+3x-1$.',choices:['$(x-1)^3$','$(x+1)^3$','$(x-1)(x^2-2x+1)$','$(x-1)(x-2)(x-3)$'],correct:0,expl:'$P(1)=0$, Ruffini → $(x-1)^3$.'},
-    {type:'pratico',q:'Scomponi $x^3+x^2+x+1$.',choices:['$(x+1)(x^2+1)$','$(x-1)(x^2+1)$','$(x+1)^3$','$(x^2+1)^2$'],correct:0,expl:'Raccoglimento parziale: $(x+1)(x^2+1)$.'}
+    {type:'pratico',q:'Scomponi $x^3+27$.',choices:['$(x+3)(x^2-3x+9)$','$(x+3)(x^2+3x+9)$','$(x+3)^3$','$(x-3)(x^2+3x+9)$'],correct:0,expl:'Somma di cubi: $(x+3)(x^2-3x+9)$.'},
+    {type:'pratico',q:'$(x+y+2)^2=$?',choices:['$x^2+y^2+4$','$x^2+y^2+4+2xy+4x+4y$','$x^2+y^2+4+xy+2x+2y$','$x^2+y^2+2xy+4$'],correct:1,expl:'Quadrati più tutti i doppi prodotti: $x^2+y^2+4+2xy+4x+4y$.'},
+    {type:'pratico',q:'Scomponi $x^2+6x+9$.',choices:['$(x+3)^2$','$(x+9)(x+1)$','$(x-3)^2$','$(x+6)(x+3)$'],correct:0,expl:'Trinomio quadrato perfetto: $(x+3)^2$.'}
+  ],
+  ruffini:[
+    {type:'teorico',q:'Il Teorema del Resto afferma che il resto di $P(x):(x-a)$ è:',choices:['$P(a)$','$0$','$a$','il grado di $P$'],correct:0,expl:'Basta sostituire: resto $=P(a)$.'},
+    {type:'pratico',q:'Resto di $(x^3-3x+1):(x-2)$?',choices:['$0$','$3$','$-1$','$1$'],correct:1,expl:'$P(2)=8-6+1=3$.'},
+    {type:'pratico',q:'Ruffini: $(x^3-2x^2+x-2):(x-2)$ → quoziente?',choices:['$x^2-1$','$x^2+1$','$x^2-2x+1$','$x^2+x+1$'],correct:1,expl:'Quoziente $x^2+1$, resto $0$.'},
+    {type:'teorico',q:'Se $P(a)=0$ allora:',choices:['$(x-a)$ è un fattore di $P(x)$','Il grado aumenta','La divisione è impossibile','$a=0$'],correct:0,expl:'Teorema del fattore: $P(a)=0 \\Rightarrow (x-a)$ divide $P(x)$.'},
+    {type:'pratico',q:'Resto di $(x^3+3x^2-4):(x-1)$?',choices:['$0$','$1$','$-4$','$2$'],correct:0,expl:'$P(1)=1+3-4=0$.'},
+    {type:'pratico',q:'Scomponi $x^3-6x^2+11x-6$ con Ruffini.',choices:['$(x-1)(x-2)(x-3)$','$(x+1)(x+2)(x+3)$','$(x-1)^3$','$(x-1)(x-2)(x+3)$'],correct:0,expl:'Radici $1,2,3$: $(x-1)(x-2)(x-3)$.'},
+    {type:'teorico',q:'Le radici intere vanno cercate tra:',choices:['I divisori del termine noto','I multipli del grado','I numeri primi','I coefficienti pari'],correct:0,expl:'Tra i divisori (positivi e negativi) del termine noto.'},
+    {type:'pratico',q:'$(x^3-8):(x-2)$ → quoziente?',choices:['$x^2+2x+4$','$x^2-2x+4$','$x^2+4$','$x^2+2x-4$'],correct:0,expl:'Differenza di cubi: quoziente $x^2+2x+4$, resto $0$.'},
+    {type:'pratico',q:'Resto di $(x^3-x):(x-1)$?',choices:['$0$','$1$','$-1$','$2$'],correct:0,expl:'$P(1)=1-1=0$.'},
+    {type:'teorico',q:'Prima di applicare Ruffini, il polinomio deve essere:',choices:['Di secondo grado','Ordinato e completo (con gli 0)','Positivo','Fattorizzato'],correct:1,expl:'Va ordinato per grado decrescente e completato con $0$ i termini mancanti.'}
   ],
   frazioni:[
     {type:'teorico',q:'Una frazione algebrica è definita quando:',choices:['Sempre','Numeratore $\\neq0$','Denominatore $\\neq0$','Grado uguale'],correct:2,expl:'Il denominatore non deve annullarsi.'},
     {type:'pratico',q:'Semplifica $\\dfrac{x^2-4}{x+2}$.',choices:['$x-2$','$x+2$','$x^2-2$','$x-4$'],correct:0,expl:'$(x+2)(x-2)/(x+2)=x-2$.'},
     {type:'pratico',q:'$\\dfrac{x}{x+1}\\cdot\\dfrac{x+1}{x^2}=$?',choices:['$\\dfrac{1}{x}$','$x$','$\\dfrac{x+1}{x}$','$1$'],correct:0,expl:'Si semplifica $(x+1)$ e una $x$: $\\dfrac{1}{x}$.'},
     {type:'pratico',q:'$\\dfrac{1}{x+1}+\\dfrac{1}{x-1}=$?',choices:['$\\dfrac{2}{x^2-1}$','$\\dfrac{2x}{x^2-1}$','$\\dfrac{2}{2x}$','$\\dfrac{x}{x^2-1}$'],correct:1,expl:'$(x-1+x+1)/((x+1)(x-1))=2x/(x^2-1)$.'},
-    {type:'teorico',q:'Per sommare frazioni algebriche serve:',choices:['MCD dei numeratori','m.c.m. dei denominatori','Prodotto dei denominatori','Quoziente'],correct:1,expl:'Serve il m.c.m. dei denominatori.'},
+    {type:'teorico',q:'Per sommare frazioni algebriche serve:',choices:['MCD dei numeratori','m.c.m. dei denominatori','Prodotto dei numeratori','Il quoziente'],correct:1,expl:'Serve il m.c.m. dei denominatori.'},
     {type:'pratico',q:'Semplifica $\\dfrac{x^2+3x+2}{x^2-1}$.',choices:['$\\dfrac{x+2}{x-1}$','$\\dfrac{x+1}{x-1}$','$\\dfrac{x-2}{x+1}$','$\\dfrac{x+2}{x+1}$'],correct:0,expl:'$(x+1)(x+2)/((x+1)(x-1))=(x+2)/(x-1)$.'},
     {type:'pratico',q:'$\\dfrac{x^2-9}{x+3}\\cdot\\dfrac{x^2+x}{x^2-3x}=$?',choices:['$x+1$','$x-1$','$\\dfrac{x+1}{x-3}$','$\\dfrac{x-1}{x+3}$'],correct:0,expl:'Semplificando tutto rimane $x+1$.'},
     {type:'pratico',q:'$\\dfrac{2}{x}-\\dfrac{3}{x+1}=$?',choices:['$\\dfrac{-x+2}{x(x+1)}$','$\\dfrac{-1}{x(x+1)}$','$\\dfrac{-x+2}{x+1}$','$\\dfrac{5x+2}{x(x+1)}$'],correct:0,expl:'$2(x+1)-3x=2x+2-3x=-x+2$.'},
-    {type:'teorico',q:'In una frazione si semplificano:',choices:['Termini di una somma','Solo fattori comuni','Qualunque cosa','I segni'],correct:1,expl:'Solo fattori, mai termini di una somma.'},
-    {type:'pratico',q:'Semplifica $\\dfrac{x^2-4x+4}{x^2-4}$.',choices:['$\\dfrac{x-2}{x+2}$','$\\dfrac{x+2}{x-2}$','$\\dfrac{x-2}{x-2}$','$\\dfrac{1}{x+2}$'],correct:0,expl:'$(x-2)^2/((x-2)(x+2))=(x-2)/(x+2)$.'}
+    {type:'teorico',q:'In una frazione si semplificano:',choices:['I termini di una somma','Solo i fattori comuni','Qualunque cosa','I segni'],correct:1,expl:'Solo i fattori, mai i termini di una somma.'},
+    {type:'pratico',q:'Semplifica $\\dfrac{x^2-4x+4}{x^2-4}$.',choices:['$\\dfrac{x-2}{x+2}$','$\\dfrac{x+2}{x-2}$','$1$','$\\dfrac{1}{x+2}$'],correct:0,expl:'$(x-2)^2/((x-2)(x+2))=(x-2)/(x+2)$.'}
   ],
   espressioni:[
-    {type:'teorico',q:'Primo passo con frazioni algebriche:',choices:['Sommare numeratori','Determinare le C.E.','Semplificare subito','Moltiplicare tutto'],correct:1,expl:'Prima le condizioni di esistenza.'},
+    {type:'teorico',q:'Primo passo con un\'espressione contenente frazioni:',choices:['Sommare i numeratori','Determinare le C.E.','Semplificare subito','Moltiplicare tutto'],correct:1,expl:'Prima le condizioni di esistenza.'},
     {type:'pratico',q:'$(x+1)^2-(x-1)^2=$?',choices:['$0$','$4x$','$2x$','$2x^2+2$'],correct:1,expl:'$(x^2+2x+1)-(x^2-2x+1)=4x$.'},
     {type:'pratico',q:'$\\dfrac{x}{x^2-1}+\\dfrac{1}{x+1}=$?',choices:['$\\dfrac{2x-1}{x^2-1}$','$\\dfrac{x+1}{x^2-1}$','$\\dfrac{2x+1}{x^2-1}$','$\\dfrac{x-1}{x^2-1}$'],correct:0,expl:'m.c.m. $x^2-1$: $(x+x-1)/(x^2-1)=(2x-1)/(x^2-1)$.'},
     {type:'pratico',q:'$\\dfrac{x^2-4}{x-2}\\cdot\\dfrac{x+1}{x+2}=$?',choices:['$x+1$','$\\dfrac{x+1}{x+2}$','$x-1$','$x^2+1$'],correct:0,expl:'$(x-2)(x+2)/(x-2)\\cdot(x+1)/(x+2)=x+1$.'},
     {type:'teorico',q:'Quale uguaglianza è SBAGLIATA?',choices:['$(a+b)^2=a^2+2ab+b^2$','$(a+b)^2=a^2+b^2$','$a^2-b^2=(a+b)(a-b)$','$(a-b)^2=a^2-2ab+b^2$'],correct:1,expl:'Manca $2ab$: errore classicissimo!'},
     {type:'pratico',q:'$(a+b)^2-(a-b)^2=$?',choices:['$0$','$2ab$','$4ab$','$2a^2+2b^2$'],correct:2,expl:'$(A+B)(A-B)=(2a)(2b)=4ab$.'},
-    {type:'pratico',q:'$\\dfrac{(x+1)^2-1}{x}=$?',choices:['$x+2$','$x+1$','$\\dfrac{x+1}{x}$','$x^2+2$'],correct:0,expl:'$(x^2+2x)/x=x+2$.'},
-    {type:'teorico',q:'Un\'espressione razionale ha senso:',choices:['Sempre','Solo se scomponibile','Per valori nel dominio','Solo se semplificabile'],correct:2,expl:'Ha senso nel suo dominio (denominatori $\\neq0$).'},
-    {type:'pratico',q:'$\\dfrac{1}{x-1}-\\dfrac{1}{x+1}=$?',choices:['$\\dfrac{2}{x^2-1}$','$\\dfrac{0}{x^2-1}$','$\\dfrac{2x}{x^2-1}$','$\\dfrac{-2}{x^2-1}$'],correct:0,expl:'$(x+1-(x-1))/(x^2-1)=2/(x^2-1)$.'},
-    {type:'pratico',q:'$\\dfrac{x^3-1}{x-1}=$? (con $x\\neq1$)',choices:['$x^2-1$','$x^2+x+1$','$x^2-x+1$','$x^2+1$'],correct:1,expl:'Differenza di cubi: $(x-1)(x^2+x+1)$ → quoziente $x^2+x+1$.'}
+    {type:'pratico',q:'$\\dfrac{(x+1)^2-1}{x}=$? (con $x\\neq0$)',choices:['$x+2$','$x+1$','$\\dfrac{x+1}{x}$','$x^2+2$'],correct:0,expl:'$(x^2+2x)/x=x+2$.'},
+    {type:'teorico',q:'Un\'espressione razionale ha senso:',choices:['Sempre','Solo se scomponibile','Per i valori del suo dominio','Solo se semplificabile'],correct:2,expl:'Ha senso nel suo dominio (denominatori $\\neq0$).'},
+    {type:'pratico',q:'$\\dfrac{1}{x-1}-\\dfrac{1}{x+1}=$?',choices:['$\\dfrac{2}{x^2-1}$','$0$','$\\dfrac{2x}{x^2-1}$','$\\dfrac{-2}{x^2-1}$'],correct:0,expl:'$(x+1-(x-1))/(x^2-1)=2/(x^2-1)$.'},
+    {type:'pratico',q:'$\\dfrac{x^3-1}{x-1}=$? (con $x\\neq1$)',choices:['$x^2-1$','$x^2+x+1$','$x^2-x+1$','$x^2+1$'],correct:1,expl:'Differenza di cubi: quoziente $x^2+x+1$.'}
   ]
 };
 
@@ -922,7 +1048,7 @@ function mountQuiz(container, key) {
       cw.appendChild(b);
     });
     container.querySelector('.next-btn').onclick=()=>{ idx++; answered=false; render(); };
-    if (window.MathJax) MathJax.typesetPromise([container]);
+    if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([container]);
   }
   function pick(i) {
     if (answered) return;
@@ -936,7 +1062,7 @@ function mountQuiz(container, key) {
     fb.className='q-feedback '+(i===q.correct?'ok':'no');
     fb.innerHTML=(i===q.correct?'✅ <strong>Corretto!</strong> ':'❌ <strong>Non corretto.</strong> ')+q.expl;
     container.querySelector('.next-btn').disabled=false;
-    if (window.MathJax) MathJax.typesetPromise([fb]);
+    if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([fb]);
   }
   function showResult() {
     saveScore(key, score, data.length);
@@ -946,22 +1072,22 @@ function mountQuiz(container, key) {
       <h3>Risultato</h3>
       <div class="result-score">${score}/${data.length}</div>
       <div class="result-msg">${msg}</div>
-      <button class="btn-primary" onclick="this.closest('.quiz-mount').dataset.mounted=''; this.closest('.panel').querySelector('.quiz-mount').innerHTML=''; mountQuiz(this.closest('.quiz-mount'),this.closest('.quiz-mount').dataset.quiz)">Riprova ↻</button>
+      <button class="btn-primary retry-btn">Riprova ↻</button>
     </div>`;
   }
   render();
 }
 
-/* Retry button fix */
+/* Retry button (delegated) */
 document.addEventListener('click', e=>{
-  const b = e.target.closest('[onclick]');
+  const b = e.target.closest('.retry-btn');
   if (!b) return;
   const m = b.closest('.quiz-mount');
-  if (m) { m.dataset.mounted=''; m.innerHTML=''; mountQuiz(m, m.dataset.quiz); }
+  if (m) { m.dataset.mounted='1'; mountQuiz(m, m.dataset.quiz); }
 });
 
 /* Init MathJax on load */
-window.addEventListener('load',()=>{ if(window.MathJax) MathJax.typesetPromise(); });
+window.addEventListener('load',()=>{ if(window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise(); });
 </script>
 </body>
 </html>
