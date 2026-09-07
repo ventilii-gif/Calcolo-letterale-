@@ -227,6 +227,18 @@ body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;backgroun
 .result-box{text-align:center;padding:28px 20px}
 .result-score{font-size:64px;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--good));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin:14px 0}
 .result-msg{font-size:17px;color:var(--body);margin-bottom:24px}
+
+.ex-checkslot{margin:2px 0 14px}
+.ex-check{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ex-in{font-family:ui-monospace,'JetBrains Mono',Menlo,Consolas,monospace;font-size:15px;padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);min-width:200px;flex:1 1 200px;max-width:340px}
+.ex-in:focus{outline:none;border-color:var(--accent)}
+.ex-verify{font:inherit;font-weight:600;font-size:14px;padding:8px 16px;border:none;border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
+.ex-verify:hover{background:var(--accent-d)}
+.ex-fb{font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;flex-basis:100%}
+.ex-fb.ok{color:var(--good)}
+.ex-fb.no{color:var(--bad)}
+.ex-fb.warn{color:var(--muted)}
+.ex-fb svg{width:16px;height:16px}
 </style>
 </head>
 <body>
@@ -950,6 +962,112 @@ const EXERCISES = {
 };
 
 /* ── EXERCISES RENDERER ── */
+/* ===== Algebraic answer checker (shared: page + tests) ===== */
+function algEval(str, vmap){
+  str=String(str);
+  var sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9'};
+  str=str.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g,function(c){return '^'+sup[c];});
+  str=str.replace(/·|×|∙|•/g,'*').replace(/−/g,'-').replace(/\*\*/g,'^').replace(/\s+/g,'');
+  if(str==='')throw new Error('empty');
+  var i=0;
+  function peek(){return str[i];}
+  function isDigit(c){return c>='0'&&c<='9';}
+  function isVar(c){return c==='a'||c==='b'||c==='x'||c==='y';}
+  function parseExpr(){
+    var v=parseTerm();
+    while(peek()==='+'||peek()==='-'){var op=str[i++];var r=parseTerm();v=op==='+'?v+r:v-r;}
+    return v;
+  }
+  function parseTerm(){
+    var v=parseUnary();
+    for(;;){
+      var c=peek();
+      if(c==='*'||c==='/'){i++;var r=parseUnary();v=c==='*'?v*r:v/r;}
+      else if(c==='('||isVar(c)||isDigit(c)||c==='.'){var r2=parseUnary();v=v*r2;}
+      else break;
+    }
+    return v;
+  }
+  function parseUnary(){
+    var c=peek();
+    if(c==='+'){i++;return parseUnary();}
+    if(c==='-'){i++;return -parseUnary();}
+    return parsePower();
+  }
+  function parsePower(){
+    var v=parseBase();
+    if(peek()==='^'){i++;var e=parseUnary();v=Math.pow(v,e);}
+    return v;
+  }
+  function parseBase(){
+    var c=peek();
+    if(c==='('){i++;var v=parseExpr();if(peek()!==')')throw new Error('paren');i++;return v;}
+    if(isDigit(c)||c==='.'){var s='';while(i<str.length&&(isDigit(str[i])||str[i]==='.'))s+=str[i++];var n=parseFloat(s);if(isNaN(n))throw new Error('num');return n;}
+    if(isVar(c)){i++;if(!(c in vmap))throw new Error('var '+c);return vmap[c];}
+    throw new Error('unexpected '+(c===undefined?'end':c));
+  }
+  var val=parseExpr();
+  if(i<str.length)throw new Error('trailing '+str.slice(i));
+  return val;
+}
+/* ref: function(vmap)->number ; vars: array of var names present in the answer */
+function checkAlg(str, ref, vars){
+  if(String(str||'').trim()==='')return null;
+  var valid=0, matched=0;
+  for(var t=0;t<6;t++){
+    var vmap={};
+    for(var k=0;k<vars.length;k++){ vmap[vars[k]]= 2.3 + t*0.37 + k*1.9; }
+    var rv;
+    try{ rv=ref(vmap); }catch(e){ continue; }
+    if(!isFinite(rv))continue;
+    var uv;
+    try{ uv=algEval(str, vmap); }catch(e){ return null; } /* parse error -> invalid input */
+    if(!isFinite(uv))continue;
+    valid++;
+    if(Math.abs(uv-rv) <= 1e-6*(1+Math.abs(rv))) matched++;
+  }
+  if(valid===0)return false;
+  return (matched===valid && valid>=3);
+}
+/* ===== Answer table: section -> exercise num -> {vars, f, ph?} ===== */
+var EX_ANS={
+  raccoglimento:{
+    1:{vars:['x','y'],f:function(v){return 4*v.x*v.y*(3*v.x*v.x-2*v.x*v.y+v.y*v.y);}},
+    2:{vars:['x'],f:function(v){return -3*v.x*(2*v.x*v.x-3*v.x+1);}},
+    3:{vars:['x'],f:function(v){return (v.x+1)*(v.x*v.x+1);}},
+    4:{vars:['a','b','x','y'],f:function(v){return (v.x+v.y)*(v.a+v.b);}},
+    5:{vars:['x'],f:function(v){return (2*v.x-1)*(v.x*v.x+3);}}
+  },
+  prodotti:{
+    1:{vars:['x'],f:function(v){return 9*v.x*v.x+12*v.x+4;}},
+    2:{vars:['x','y'],f:function(v){return 4*v.x*v.x-v.y*v.y;}},
+    3:{vars:['x'],f:function(v){return 8*v.x*v.x*v.x-12*v.x*v.x+6*v.x-1;}},
+    4:{vars:['x'],f:function(v){return (3*v.x+4)*(3*v.x-4);}},
+    5:{vars:['x'],f:function(v){return (v.x-3)*(v.x*v.x+3*v.x+9);}}
+  },
+  ruffini:{
+    1:{vars:['x'],f:function(v){return v.x*v.x-5*v.x+6;},ph:'Il quoziente (es. x^2-5x+6)'},
+    2:{vars:[],f:function(){return 3;},ph:'Il resto (un numero)'},
+    3:{vars:['x'],f:function(v){return (v.x-1)*(v.x-2)*(v.x-3);}},
+    4:{vars:['x'],f:function(v){return (v.x-1)*(v.x+1)*(v.x+1);}},
+    5:{vars:['x'],f:function(v){return (v.x-1)*(v.x-2)*(v.x+3);}}
+  },
+  frazioni:{
+    1:{vars:['x'],f:function(v){return v.x-3;}},
+    2:{vars:['x'],f:function(v){return (5*v.x-1)/((v.x+1)*(v.x-2));},ph:'Usa le parentesi al denominatore'},
+    3:{vars:['x'],f:function(v){return v.x+3;}},
+    4:{vars:['x'],f:function(v){return (v.x*v.x-v.x-1)/(v.x*(v.x+1));},ph:'Usa le parentesi al denominatore'},
+    5:{vars:['x'],f:function(v){return (v.x-3)/(v.x+2);},ph:'Usa le parentesi al denominatore'}
+  },
+  espressioni:{
+    1:{vars:['x'],f:function(v){return 8*v.x;}},
+    2:{vars:['x'],f:function(){return 0;}},
+    3:{vars:['x'],f:function(v){return 2/(v.x-2);},ph:'Usa le parentesi al denominatore'},
+    4:{vars:['x'],f:function(v){return (2*v.x+1)/(v.x*(v.x+1));},ph:'Usa le parentesi al denominatore'},
+    5:{vars:['x'],f:function(){return 1;}}
+  }
+};
+
 function mountExercises(container, key) {
   const data = EXERCISES[key];
   if (!data) { container.innerHTML='<div class="ex-card">Esercizi non disponibili.</div>'; return; }
@@ -962,6 +1080,7 @@ function mountExercises(container, key) {
       <div class="ex-num">Esercizio ${ex.num}</div>
       <div class="ex-title">${ex.title}</div>
       <div class="ex-prompt">${ex.prompt}</div>
+      <div class="ex-checkslot"></div>
       <div class="steps-wrap"></div>
       <div class="ex-actions">
         <button class="btn-ghost step-btn">Passo successivo ▶</button>
@@ -988,6 +1107,24 @@ function mountExercises(container, key) {
     allBtn.onclick  = () => { revealed = ex.steps.length; renderSteps(); };
     resBtn.onclick  = () => { revealed = 0; renderSteps(); };
     container.appendChild(card);
+    (function(){
+      var meta=(typeof EX_ANS!=='undefined'&&EX_ANS[key])?EX_ANS[key][ex.num]:null;
+      if(!meta)return;
+      var slot=card.querySelector('.ex-checkslot');
+      var iw=document.createElement('div');iw.className='ex-check';
+      var inp=document.createElement('input');inp.type='text';inp.className='ex-in';
+      inp.placeholder=meta.ph||'La tua risposta (es. (x-1)(x+2))';inp.setAttribute('aria-label','La tua risposta');
+      var vb=document.createElement('button');vb.className='ex-verify';vb.type='button';vb.textContent='Verifica';
+      var fb=document.createElement('div');fb.className='ex-fb';
+      iw.appendChild(inp);iw.appendChild(vb);iw.appendChild(fb);slot.appendChild(iw);
+      var CHK="<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6 9 17l-5-5'/></svg>";
+      function doCheck(){var r=checkAlg(inp.value,meta.f,meta.vars);
+        if(r===null){fb.className='ex-fb warn';fb.textContent='Scrivi la risposta come espressione (usa ^ per le potenze, es. x^2).';return;}
+        if(r){fb.className='ex-fb ok';fb.innerHTML=CHK+' Corretto!';}
+        else{fb.className='ex-fb no';fb.textContent='Non ancora — riprova o segui i passi.';}}
+      vb.addEventListener('click',doCheck);
+      inp.addEventListener('keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();doCheck();}});
+    })();
   });
   if (window.MathJax && window.MathJax.typesetPromise) MathJax.typesetPromise([container]);
 }
